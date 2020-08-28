@@ -389,8 +389,17 @@ Examples:
 		<rich_text> -p 'username=bob&amp;password=XSS' --Xsr --Xsa
 </rich_text>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="ZAP" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1598358511.4" ts_lastsave="1598358513.35" unique_id="4">
-		<rich_text>Import certificates to be able to test recapctha, payment providers, etc.</rich_text>
+	<node custom_icon_id="0" foreground="" is_bold="False" name="ZAP" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1598358511.4" ts_lastsave="1598363811.31" unique_id="4">
+		<rich_text>Import certificates to be able to test recapctha, payment providers, etc.
+
+1) Proceeding open ZAP and enter website via ZAP
+2) Set context by clicking on the site in the navigation
+3) When for instance entering the login page set tags on the relevant requests (right click on the request and “manage tags”
+4) To reexecute a reqeust egain with adjust the test data manually =&gt; right click on desired request and click on “Open and resent...” has a hand in front</rich_text>
+	</node>
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Info" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1598358607.59" ts_lastsave="1598358608.12" unique_id="5">
+		<rich_text>boris.arapovic1232112@gmail.com
+</rich_text>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="WebServers" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1591417495.19" ts_lastsave="1591417496.41" unique_id="3">
 		<rich_text>//searching for volnurabilities 
