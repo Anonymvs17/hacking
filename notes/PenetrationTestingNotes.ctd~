@@ -195,7 +195,7 @@ SH server version: SSH-2.0-OpenSSH_6.6.1p1 Ubuntu-2ubuntu2.8 ( service.version=6
 
 </rich_text>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="OWAP Testing checklist" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1600450925.57" ts_lastsave="1601141315.55" unique_id="23">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="OWAP Testing checklist" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1600450925.57" ts_lastsave="1601141507.19" unique_id="23">
 		<rich_text link="webs https://github.com/tanprathan/OWASP-Testing-Checklist">https://github.com/tanprathan/OWASP-Testing-Checklist</rich_text>
 		<rich_text>
 
@@ -207,7 +207,8 @@ SH server version: SSH-2.0-OpenSSH_6.6.1p1 Ubuntu-2ubuntu2.8 ( service.version=6
 1) Try to only put ' or “ in
 
 //ends wit comment to ignore rest select * from users where email='$email' and password='pw' =&gt; tansforms to: slect * from users where email=' ' OR 1=1--' and password='pw' 
-2) ' OR 1=1--</rich_text>
+2) ' OR 1=1--
+3) ' OR 1=1; --</rich_text>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="PasswordBruteforcing" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1595909601.98" ts_lastsave="1596824264.21" unique_id="14">
 		<rich_text>***HYDRA******

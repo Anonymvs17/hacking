@@ -195,7 +195,7 @@ SH server version: SSH-2.0-OpenSSH_6.6.1p1 Ubuntu-2ubuntu2.8 ( service.version=6
 
 </rich_text>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="OWAP Testing checklist" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1600450925.57" ts_lastsave="1601140862.8" unique_id="23">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="OWAP Testing checklist" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1600450925.57" ts_lastsave="1601141300.6" unique_id="23">
 		<rich_text link="webs https://github.com/tanprathan/OWASP-Testing-Checklist">https://github.com/tanprathan/OWASP-Testing-Checklist</rich_text>
 		<rich_text>
 
@@ -205,7 +205,9 @@ SH server version: SSH-2.0-OpenSSH_6.6.1p1 Ubuntu-2ubuntu2.8 ( service.version=6
 ****SQL******
 
 1) Try to only put ' or “ in
-2) </rich_text>
+
+//ends wit comment:
+2) ' OR 1=1--</rich_text>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="PasswordBruteforcing" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1595909601.98" ts_lastsave="1596824264.21" unique_id="14">
 		<rich_text>***HYDRA******
