@@ -1,7 +1,16 @@
 # MSF 
 
-## use searchsploit for searching
-searchsploit apache 2.2
+# WORKSPACES
+# Create workspace
+workspace -a
+
+# Call workspaces
+workspace
+
+# Switch to workspace
+workspace spaceName
+
+## basics
 
 //search
 msf-pro > search platform:Windows
