@@ -13,3 +13,4 @@ TCP: Three way handshake for google.com: SYN => SYN/ACK (GOOGLE) => ACK
 
 # Wireshark 
 check handshake on img/handshake.png
+![handshakeDemoWireshark](img/typeofDosAttacks.png)
