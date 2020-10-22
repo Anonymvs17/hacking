@@ -36,7 +36,7 @@ Running (JUST GUESSING): Microsoft Windows 2016|2012|2008|10 (91%)
 OS CPE: cpe:/o:microsoft:windows_server_2016 cpe:/o:microsoft:windows_server_2012 cpe:/o:microsoft:windows_server_2008:r2 cpe:/o:microsoft:windows_10:1607                                                   
 Aggressive OS guesses: Microsoft Windows Server 2016 (91%), Microsoft Windows Server 2012 (85%), Microsoft Windows Server 2012 or Windows Server 2012 R2 (85%), Microsoft Windows Server 2012 R2 (85%), Microsoft Windows Server 2008 R2 (85%), Microsoft Windows 10 1607 (85%)     
 
-ervice Info: Host: FUSE; OS: Windows; CPE: cpe:/o:microsoft:windows
+Service Info: Host: FUSE; OS: Windows; CPE: cpe:/o:microsoft:windows
 
 Host script results:
 |_clock-skew: mean: 2h35m33s, deviation: 4h02m30s, median: 15m33s

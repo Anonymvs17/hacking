@@ -28,3 +28,8 @@ ls -la /
 
 //Navigation to usr path (incl. access rights)
 ls -la /usr/
+
+# editing files
+* cat => just reads file
+* gedit => opens editor
+* nano (then interactions with f.i. ctrl + O for writing in file - saving)
