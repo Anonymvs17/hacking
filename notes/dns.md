@@ -1,0 +1,1 @@
+dig @your.dns.server www.foo.bar

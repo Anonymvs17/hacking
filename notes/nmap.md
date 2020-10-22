@@ -16,3 +16,6 @@ nmap -A 192.168.0.1
 
 # Scan all ports (not just top 1000)
 sudo nmap -T4 -p- -A 192.168.0.6
+
+# for AD and DNS
+nmap -A -Pn -sC -sV 10.10.10.193
