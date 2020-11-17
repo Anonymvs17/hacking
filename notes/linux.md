@@ -84,4 +84,48 @@ cat error.txt leads to string in file: bash: cd: ./test: No such file or directo
 //redirect output of error.txt to wc command (wordcount) to redirect to a file amount.txt (which will contain f.e.: 32)
 cat error.txt | wc -m > amount.txt
 
+### text search and manipulation
+### grep
+//list files and search only for zip
+ls -la /usr/bin | grep zip
 
+### cut (cut can only acceppt single char as field delimiter)
+//cutting something out of text
+ echo "was, läuft, bei dir" | cut -f 2 -d ","
+ //will print
+ läuft
+
+//from file (passwd): cutting first with : being the delimiter
+cut -d ":" -f 1 /etc/passwd
+
+### awk (can acceppt multiple char as field delimiter)
+//removes "::" and returns first and 3rd group
+echo "hello::how::are::you?" | awk -F "::" '{print $1, $3}'
+hello are
+
+### analysing file (advanced)
+cat access.log | cut -d " " -f 1 | sort -u
+//prints the ip addresses (unique)
+
+## head (displays the first ten lines of a file)
+head someFile.txt
+
+## file editing
+nano filename.txt
+
+vi filename => then press I to change to insert text mode
+
+## Comparing files
+### comm
+//prints out comparison, left handside unique for scan-a
+comm scan-a.txt scan-b.txt
+
+//just showns the common text
+comm -12 scan-a.txt scan-b.txt
+
+### diff
+diff -c scan-a.txt scan-b.txt
+
+### vmdiff (shows diffs seperated)
+
+vmdiff scan-a.txt scan-b.txt
