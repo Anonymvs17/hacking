@@ -9,6 +9,9 @@ chmod -x input.sh
 //open file
 ./file.sh
 
+# findings imports for commands
+type -a cat
+
 # arguments
 
 ``
