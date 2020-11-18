@@ -37,6 +37,7 @@ ls -a1
 
 # editing files
 * cat => just reads file
+* less => reads file
 * gedit => opens editor
 * nano (then interactions with f.i. ctrl + O for writing in file - saving)
 
@@ -129,3 +130,45 @@ diff -c scan-a.txt scan-b.txt
 ### vmdiff (shows diffs seperated)
 
 vmdiff scan-a.txt scan-b.txt
+
+## background processes
+bg
+
+### return a job the foreground (just from the current cli)
+#### see all jobs 
+jobs
+#### 1 being the job number
+fg %1
+
+### lists processes system wide (not only cli) => got to get clues
+ps -ef 
+
+//to get a specific process
+ps -fC leafpad
+
+//kill wiht process id
+kill 1234
+
+### file and commands monitoring
+//montor logs at they are being logged 
+tail -f /vat/log/apache2/access.log
+
+## Download files
+//download file via http or ftp protocolls
+wget -O desiredName.pdf path
+
+### download or upload file 
+curl -o report.pdf https://....
+
+### useful for large downloads
+axel -a -n 20 -o report.pdf https://...
+
+## creating own commands with alias
+ alias lsa='ls -la'
+
+ //running it
+ lsa
+
+ ## bash behavior
+ in "/etc/bash.bashrc"
+
