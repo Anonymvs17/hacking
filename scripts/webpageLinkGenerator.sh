@@ -9,7 +9,7 @@ read -p 'filename: ' filename
 echo "Extracting links for $page"
 
 #command: wget -O - www.megacorpone.com > myfile.html
-$wget -O - $url | $grep -Po '(?<=href=")[^"]*' > $filename
+$wget --no-check-certificate -O - $url | $grep -Po '(?<=href=")[^"]*' > $filename
 
 # get file
 #file=`$cat $filename`
