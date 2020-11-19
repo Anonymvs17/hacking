@@ -51,4 +51,12 @@ was desing to scan the whole internet in 6 min
 
 sudo masscan -p80 10.11.1.0/24 --rate=100 -e tab0 --router-ip 10.11.0.1
 
+# nmap scripts
+//contains useful scripts for example for smb
+ls -l /usr/share/nmap/scripts/smb*
 
+## running 1 script
+nmap -v -p 139,445 --script=smb-os-discovery 10.11.1.227
+
+## running all scripts
+nmap -p 139,445 --script=smb* 10.11.1.227

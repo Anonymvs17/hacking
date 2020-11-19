@@ -10,4 +10,13 @@ nbtstat -A 192.168.0.13
 seperate protocoll from netbios
 modern application can work without netbios, netbios over tcp is required and is ofter enabled together
 
+# nmap scanning
+nmap -v -p 139,445 -oG smb.txt 10.11.1.1-254
 
+## vulnscripts
+ls -l /usr/share/nmap/scripts/smb-vuln-*
+
+# nbtscan 
+//find all computers in a windows network; 
+//-r tackles port 137 which is UDP netbios name service
+sudo nbtscan -r 10.11.1.0/24
