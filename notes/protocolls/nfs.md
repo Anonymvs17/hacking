@@ -11,3 +11,6 @@ nmap -sV -p 111 --script=rpcinfo.nse 10.11.1.1-254
 # run all scripts on specific host
 nmap -p 111 --script=nfs* 10.11.1.72
 
+// if mount is available: nolock to disable file locking
+sudo mount -o nolock 10.11.1.72:/home ~/home/
+
