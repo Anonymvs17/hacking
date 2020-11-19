@@ -47,3 +47,38 @@ then
 fi
 ```
 
+# logical operators
+if [ $age -ge 18 ] && [ $age -ge 40 ]
+
+# loops
+
+## for
+for ip in $(seq 1 10); do echo 10.11.1.$ip; done
+for i in {1..10}; do
+
+## while
+
+```
+#!/bin/bash
+counter=1
+
+while [ $counter -lt 10 ]
+    do echo "10.11.1.$counter"
+    ((counter++))
+done
+```
+
+# functions
+```
+#!/bin/bash
+# function should created before being called;
+# arguments are being passed not with (arg1) instead via $1
+
+print_me() {
+    echo "yolooo $1"
+}
+
+# calling with argument Boo 
+print_me Boo
+```
+
