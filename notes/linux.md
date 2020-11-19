@@ -174,3 +174,6 @@ axel -a -n 20 -o report.pdf https://...
  ## bash behavior
  in "/etc/bash.bashrc"
 
+ # backup linux
+ sudo cp /etc/apt/sources.list /etc/apt/sources.list.backup
+

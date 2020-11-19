@@ -44,7 +44,6 @@ nmap -v -sn 10.11.1.1-254 -oG ping-sweep.txt
 
 //grab file
 grep Up ping-sweep.txt | cut .... | head
-
 # MASScan (DON NOT RUN)
 can easily handle type A & B network
 was desing to scan the whole internet in 6 min
