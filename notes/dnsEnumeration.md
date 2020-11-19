@@ -43,12 +43,12 @@ host 20.203.12.31
 # dnrecon
 
 ## zone transer
-dnsrecon -d megacorpone.com -t axtf 
+dnsrecon -d megacorpone.com -t axfr
 
 ## bruteforce add. domains
 
 //-D specifiy filename containing subdomain strings -t bruteforce
-dnrecon -d megacorpone.com -D ~/list.txxt -t brt
+dnsrecon -d megacorpone.com -D ~/list.txt -t brt
 
 # dnsenum
 dnsenum zonetransfer.me
