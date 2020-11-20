@@ -153,9 +153,11 @@ kill 1234
 //montor logs at they are being logged 
 tail -f /vat/log/apache2/access.log
 
-## Download files
+## Download files or website (index file)
 //download file via http or ftp protocolls
 wget -O desiredName.pdf path
+
+wget http://
 
 ### download or upload file 
 curl -o report.pdf https://....
