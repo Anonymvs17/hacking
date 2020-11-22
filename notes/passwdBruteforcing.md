@@ -1,3 +1,9 @@
+# commond passwords available in kali
+/usr/share/worklists/rockyou.txt
+
+## unzip with
+gunzip /usr/share/worklists/rockyou.txt.gz
+
 # HYDRA
 
 //using username “root” with a password list on ssh with 4 parallel tasks and verbose
