@@ -5,7 +5,8 @@
 2) request goes to your ISP's or Offices DNS Server (DNS recurser); two zone for each domain (forwars and reverse lookup zone)
 3) Then to external root DNS server
 
-# interacting with dns
+# Forward lookup
+## interacting with dns
 
 //by default looks for ahost => generates IP addr
 host www.megacorpone.com
@@ -26,6 +27,11 @@ router
 
 iterating over this routelist with a for
 
-# install seclist for proper data
+## install seclist for proper data
 apt install seclists
+
+# Reverse lookup
+host 20.203.12.31
+
+
 
