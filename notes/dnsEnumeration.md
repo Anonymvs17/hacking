@@ -14,6 +14,13 @@ host www.megacorpone.com
 //to find email server
 host -t mx megacorpone.com
 
+## findings dns servers
+host -t ns megacorpone.com
+//has three dns servers
+
+## host transfers (zone file copies from master dns server to slave servers, many admins misconfigs this)
+host -l megacorpone.com ns1.megacorpone.com
+
 ## bruteforcing 
 can be automated with bash scripts
 create file list.txt containing
@@ -33,5 +40,15 @@ apt install seclists
 # Reverse lookup
 host 20.203.12.31
 
+# dnrecon
 
+## zone transer
+dnsrecon -d megacorpone.com -t axtf 
 
+## bruteforce add. domains
+
+//-D specifiy filename containing subdomain strings -t bruteforce
+dnrecon -d megacorpone.com -D ~/list.txxt -t brt
+
+# dnsenum
+dnsenum zonetransfer.me
