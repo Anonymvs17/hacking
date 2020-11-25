@@ -85,3 +85,27 @@ print_me() {
 print_me Boo
 ```
 
+# iterating over next file for each line
+## text file list.txt
+``
+mail
+router
+server
+test
+``
+
+//scripts
+for i in $(cat list.txt); do echo "$i.megacorpone.com"; host $i.megacorpone.com; done
+
+//output
+``
+mail.megacorpone.com
+mail.megacorpone.com has address 3.220.61.179
+router.megacorpone.com
+router.megacorpone.com has address 3.220.61.179
+server.megacorpone.com
+Host server.megacorpone.com not found: 3(NXDOMAIN)
+test.megacorpone.com
+test.megacorpone.com has address 3.220.61.179
+``
+
