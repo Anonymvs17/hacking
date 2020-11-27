@@ -1,4 +1,22 @@
-//info about user
+# user 
+
+# file of which user (example user uid: 1014)
+f.e.. check file permissions (ls -al)
+-rwx---------  1 1014 1014  48 Jun 21 08:31 creds.txt
+
+## add user with name pwn
+sudo adduser pwn
+//generates uid 1001
+
+## change uid 
+//replaces all occurences from 1001 to 1014
+sudo sed -i -e 's/1001/1014/g' /etc/passwd
+
+## login as user
+su pwn
+or su - pwn
+
+## checked uid of user
 id
 
 //check with shells are suppported 
@@ -10,9 +28,6 @@ shell
 
 //getting bash with pyhton script usually works with shell
 python -c "import pty;pty.spawn('/bin/bash')" 
-
-//login as different user in bash
-su - paul
 
 //check with shells are supported for which user
 cat /etc/passwd
