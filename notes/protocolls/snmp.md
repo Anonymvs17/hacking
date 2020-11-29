@@ -1,6 +1,7 @@
 # simple network protocoll
+used for tracking health of device, switchtes, etc. Like for instance temperature
 
-1,2 & 2.3 no traffic encryption
+1,2 & 2.3 no traffic encryption, use "community string", no username
 
 # SNMP MIB Tree
 Database containings info related to network management
