@@ -9,6 +9,7 @@ message are downloaded locally and removed from webserver (bad for multiple devi
 Port 110 non-encrypted
 Port 995 encrypted
 
+## retrieving mails
 ### imap
 used for accessing emails on a remote webserver
 allows simultanous access
