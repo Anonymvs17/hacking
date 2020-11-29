@@ -56,6 +56,10 @@ ls -a1
 * gedit => opens editor
 * nano (then interactions with f.i. ctrl + O for writing in file - saving)
 
+## create file and write line by line in file
+cat > community<<EOF
+//then you can type each line
+
 # information (prints out information on command)
 man ls 
 
