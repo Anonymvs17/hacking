@@ -5,6 +5,10 @@ used for tracking health of device, switchtes, etc. Like for instance temperatur
 
 # SNMP MIB Tree
 Database containings info related to network management
+contains OIDs (object ids) - like for instance of temperature, status types
+f.e.: 
+oid |   name     |type       |   status type    | explainatinon
+.2  | temperature| Integer   | -                | Temperature of the NAS 
 
 ## scan entire mib tree
 snmpwalk -c public -v1 -t 10 10.11.1.14
