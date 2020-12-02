@@ -196,3 +196,8 @@ axel -a -n 20 -o report.pdf https://...
  # backup linux
  sudo cp /etc/apt/sources.list /etc/apt/sources.list.backup
 
+ # integrity
+ //checking files 
+ md5sum Nessus-8.12.1-debian6_i386.deb
+
+
