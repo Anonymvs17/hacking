@@ -7,3 +7,7 @@ gobuster dir -u http://10.10.10.56/cgi-bin/ -w /usr/share/wordlists/dirb/small.t
 
 # wfuss
 wfuzz -c -w /usr/share/seclists/Discovery/Web-Content/common.txt --hc 404,403 -u "http://10.10.10.191/FUZZ.txt" -t 100
+
+# dirb
+//delay of 10 ms for each request
+dirb http//www.megacorpone.com -r -z 10

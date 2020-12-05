@@ -11,7 +11,20 @@ oid |   name     |type       |   status type    | explainatinon
 .2  | temperature| Integer   | -                | Temperature of the NAS 
 
 ## scan entire mib tree
+// -c community, version 1 & timout 10 sec
 snmpwalk -c public -v1 -t 10 10.11.1.14
+
+###  enumerate users on windows system
+snmpwalk -c public -v1 10.11.1.14 1.3.6.1.4.1.77.1.2.25
+
+### enumerate running windows processes
+snmpwalk -c public -v1 10.11.1.73 1.3.6.1.2.1.25.4.2.1.2
+
+### enumerate open tcp ports
+snmpwalk -c public -v1 10.11.1.73 1.3.6.1.2.1.6.13.1.3
+
+### enumerating installed software
+snmpwalk -c public -v1 10.11.1.73 1.3.6.1.2.1.25.6.3.1.2
 
 # scan for snmp
 
