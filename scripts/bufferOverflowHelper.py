@@ -23,3 +23,4 @@ while True:
     except: 
         print("Fuzzing crashed at %s bytes" % str(len(buffer)))
         sys.exit()
+#once executed with immunity debugger check at how many bytes the application has crashed
