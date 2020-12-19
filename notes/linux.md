@@ -27,7 +27,7 @@ cat /etc/shells
 shell
 
 //getting bash with pyhton script usually works with shell
-python -c "import pty;pty.spawn('/bin/bash')" 
+``python -c "import pty;pty.spawn('/bin/bash')"``
 
 //check with shells are supported for which user
 cat /etc/passwd
@@ -199,5 +199,9 @@ axel -a -n 20 -o report.pdf https://...
  # integrity
  //checking files 
  md5sum Nessus-8.12.1-debian6_i386.deb
+
+ # remote desktop
+ sudo rdesktop 192.168.174.10 -P -z -u offsec -p lab
+
 
 
