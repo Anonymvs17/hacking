@@ -4,7 +4,7 @@
 
 ## Stack
 * When a tread is running it execute code form the progam image or the DDLs.
-* The thread requieres shor term data areas for functions, variable, program control information => stack.
+* The thread requieres short term data areas for functions, variable, program control information => stack.
 * Each threat has its own stack
 * LIFO (push/pop)
 
@@ -13,6 +13,7 @@ When code wihting a thread calls a function is must know on which address to ret
 
 Example of return mechanics (stored in a section of stack called stack frame):
 | Thread stack frame example|
+| ------------- |
 | Function A return address: 0x00401024 |
 | Parameter 1 for Function A: 0x000000040|
 | Parameter 2 for Function A: 0x000001000|

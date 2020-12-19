@@ -1,5 +1,5 @@
 # netbios: network basic input and output system (port 139 & serval udp port)
-facilites and allows communication between computers on a local networks 
+facilitates and allows communication between computers on a local networks 
 Session layer protocol an service that allows hosts in a local network to communicate with each other.
 // but netbios over TCP/IP also outside of subnets
 ## in powershell 
