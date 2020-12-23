@@ -64,3 +64,6 @@ once we know the versions we can look for exports targeting those driver version
 
 
 # automated enumeration
+doing it manually takes too much time, thankfully can be automated, check [win-privesc-check](https://github.com/pentestmonkey/windows-privesc-check)
+On linux: f.e.: https://github.com/leonteale/pentestpackage/blob/master/web_shells/unix-privesc-check
+Automated good but it is important to watch out for manual configuration!
