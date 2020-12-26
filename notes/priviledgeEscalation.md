@@ -67,3 +67,21 @@ once we know the versions we can look for exports targeting those driver version
 doing it manually takes too much time, thankfully can be automated, check [win-privesc-check](https://github.com/pentestmonkey/windows-privesc-check)
 On linux: f.e.: https://github.com/leonteale/pentestpackage/blob/master/web_shells/unix-privesc-check
 Automated good but it is important to watch out for manual configuration!
+
+# User Account Control
+on win user gets accesstoken for applications and also check for integrety is being performed (we either need to type user name and pw or consent when for instance doing important operations, like changing the pw)
+* open cmd and type ``whoami /groups``, we see in type label "Verbindliche Beschriftung\Mittlere Verbindlichkeitsstufe" => we can't change a pw on medium lvl (cmd)
+* ``powershell.exe Start-Process cmd.exe -Verb runAs`` after giving cosent we are presented with a new high integrity process, there we can change the pw ``net user admin someNewPw``
+
+## User account control bypass
+Allows admin user to do some hight integrity actions by bypassing integrity levels
+* Using ``C:\Windows\System32\fodhelper.exe`` target win 10 build 17.09 (specific build)
+* We start this binary and inspect the manifest with ``sigcheck.exe -a -m C:\Windows\System32\fodhelper.exe`` we see that Admin is requited but it can auto elevate integrity
+* Start process monitor: ``procmon.exe``
+=> check further on pdf or video
+
+# insecure file permissions
+* on win type: ``Get-WmiObject win32_service | Select-Object Name, State, PathName | Where-Object {$_.State -like 'Running'}`` check for services which are installed in the program file directory (is user installed and more prone to this)
+* Check: https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/icacls && the program you want to check permissions for: ``icacls "C:\Program Files\Serviio\bin\ServiioService.exe"``. Outcome ``BUILTIN\Users:(I)(F)`` allows any user read or write access => voln
+* we can replace this service with our binary
+* Create exe out of [scripts/pricEsc/addUserC] by ``i686-w64-mingw32-gcc adduser.c -o adduser.exe``
