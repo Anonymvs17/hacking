@@ -79,9 +79,20 @@ Allows admin user to do some hight integrity actions by bypassing integrity leve
 * We start this binary and inspect the manifest with ``sigcheck.exe -a -m C:\Windows\System32\fodhelper.exe`` we see that Admin is requited but it can auto elevate integrity
 * Start process monitor: ``procmon.exe``
 => check further on pdf or video
+* we changed registries (there for instance information is stored on how to start a program)
+* we adjusted a registry to execute shell and then we gained the high integritiy cmd
 
 # insecure file permissions
+When devs are not properly handling permissions (assigning Full access to all users). Program could then be replaced with a malicous one having full access.
+Look for paths like: ``C:\Program Files\`` where software devs control the structure. More prone to this type of vuln.
+
 * on win type: ``Get-WmiObject win32_service | Select-Object Name, State, PathName | Where-Object {$_.State -like 'Running'}`` check for services which are installed in the program file directory (is user installed and more prone to this)
 * Check: https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/icacls && the program you want to check permissions for: ``icacls "C:\Program Files\Serviio\bin\ServiioService.exe"``. Outcome ``BUILTIN\Users:(I)(F)`` allows any user read or write access => voln
 * we can replace this service with our binary
 * Create exe out of [scripts/pricEsc/addUserC] by ``i686-w64-mingw32-gcc adduser.c -o adduser.exe``
+* with ftp we put this file on the target machine and replace the ServioService.exe
+* but we need to restart the service somehow (otherwise it will not work)
+* we check first the start mode ``wmic service where caption="Serviio" get name, caption, state, startmode`` => end get info on if it is running and if the StartMode is on auto (will automatically start on system restart), so we might restart Serviio by restarting the system
+* check if the current user has rights to restart the system ``whoami /priv`` => if shutdownPriviledge is shown then we have the rights to do it (otherwise it would not be listed in the list and we would need to wait until someone else restarts the system manually)
+* reboot system ``shutdown /r /t 0``
+* Now we should be able to login into the machine with the "evil" account and local admin group (``net localgroup Administrators``) with rhost for instance
