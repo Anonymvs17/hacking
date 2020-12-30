@@ -89,5 +89,5 @@ compresses file by 50%
 => see slides
 
 # linux and netcat
-* on a system open bind shell for a specific file f.e.: `` nc.exe -nlvp 4445 > C:\Users\offsec\binary.exe``
-* on kali we send our binary.exe to our windows client: ``nc -w 3 10.11.0.22 4455 < binary.exe``
+* on a system open bind shell for a specific file f.e.: ``nc -nlvp 4445 > C:\Users\offsec\binary.exe``
+* on kali we send our binary.exe to our windows client: ``nc -w 3 10.11.0.22 4445 < binary.exe``

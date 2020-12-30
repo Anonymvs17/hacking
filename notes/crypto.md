@@ -4,7 +4,7 @@
 ## Synchronous
 Only with public key 
 
-Examples: AEM 
+Examples: AES 
 
 ## Asyncronous
 Private and publish key
