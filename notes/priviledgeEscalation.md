@@ -63,6 +63,9 @@ once we know the versions we can look for exports targeting those driver version
 * Baniary is owned by root and has the suid bit set any user can execute this binary with elevating priviledges ``find / -perm -u=s -type f 2>/dev/null``, f.e.: if the copy command is suid set then we can copy to senenstive files
 
 # automated enumeration
+
+*Try this one: https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/linPEAS*
+
 doing it manually takes too much time, thankfully can be automated, check [win-privesc-check](https://github.com/pentestmonkey/windows-privesc-check)
 On linux: f.e.: https://github.com/leonteale/pentestpackage/blob/master/web_shells/unix-privesc-check
 Automated good but it is important to watch out for manual configuration!

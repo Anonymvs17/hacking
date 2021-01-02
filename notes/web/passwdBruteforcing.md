@@ -1,8 +1,33 @@
+In general many pws under `/usr/share/worklists/`
 # commond passwords available in kali
 /usr/share/worklists/rockyou.txt
 
 ## unzip with
 gunzip /usr/share/worklists/rockyou.txt.gz
+
+# dictionary attack
+* geneate wordlist by studying website, creates a file which contains works greater than six chars (-m6): `cewl www.megacorpone.com -m 6 -w megacorp-cewl.txt`
+* using John the Ripper to mutate the wordlist: `sudo nano /etc/john/john.conf`
+We might just add a unique rule for JTR (see adding following text in code): 
+```
+# Wordlist mode rules
+[List.Rules:Wordlist]
+# Try words as they are
+:
+# Lowercase every pure alphanumeric word
+-c >3 !?X l Q
+# Capitalize every pure alphanumeric word
+-c (?a >2 !?X c Q
+# Lowercase and pluralize pure alphabetic words
+...
+# Try the second half of split passwords
+-s x_
+-s-c x_ M l Q
+# [Adding following:]Add two numbers to the end of each password
+$[0-9]$[0-9]
+```
+* run to mutate the list: `john --wordlist=bigTree-cewl.txt --rules --stdout > mutated.txt` 
+
 
 # HYDRA
 
