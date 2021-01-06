@@ -15,6 +15,11 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ## OS 
 Ubuntu
 
+## Info about ports
+* SSH:  SSH-2.0-OpenSSH_5.8p1 Debian-7ubuntu1 ( service.version=5.8p1 openssh.comment=Debian-7ubuntu1 service.vendor=OpenBSD service.family=OpenSSH service.product=OpenSSH service.cpe23=cpe:/a:openbsd:openssh:5.8p1 os.vendor=Ubuntu os.family=Linux os.product=Linux os.version=11.10 os.cpe23=cpe:/o:canonical:ubuntu_linux:11.10 service.protocol=ssh fingerprint_db=ssh.banner)
+
+
+
 ## Server
 Apache/2.2.20
 

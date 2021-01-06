@@ -27,6 +27,8 @@ We will develop a powershell script that will enumerate the AD users along with 
 We will use a DirectorySearcher object to query Active Directory using the *Lightweight Directory Access Protocol (LDAP)*, which is a network protocol understood by domain controllers also used for communication with third-party applications.
 LDAP is an Active Directory Service Interfaces (ADSI) provider (essentially an API) that supports search functionality against an Active Directory.
 
+* Our script will center around a very specific LDAP provider path: `LDAP://HostName[:PortNumber][/DistinguishedName]`
+* 
 ## useful blog
 
 https://medium.com/@adam.toscher/top-five-ways-i-got-domain-admin-on-your-internal-network-before-lunch-2018-edition-82259ab73aaa
