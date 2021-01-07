@@ -73,13 +73,12 @@ www.ssllabs.com
 # Serachsploit
 searchsploit cutenews
 
-# pastebin
-can search for sensitive information
+## check file info 
+Filename: 21398
+`searchsploit -x 21398`
 
-
-//then path is interesting we can mirror it: downloads file
-
-searchsploit -m 46698.rb
+## download file
+`searchsploit -m 46698.rb`
 
 # to gather emails, ips, subdomains, etc.
 theharvester -d megacorpone.com -b google
