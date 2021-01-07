@@ -38,3 +38,6 @@ nc -nv 10.11.1.217 25
 VRFY root
 
 VRFY NonExistingUsers
+
+# to enumerate users
+smtp-user-enum -M VRFY -U /usr/share/wordlists/dirb/common.txt -t 192.168.2.4

@@ -203,5 +203,8 @@ axel -a -n 20 -o report.pdf https://...
  # remote desktop
  sudo rdesktop 192.168.174.10 -P -z -u offsec -p lab
 
+ # reverse shell cheet sheet
+ https://www.hacknos.com/reverse-shell-cheat-sheet/
+
 
 

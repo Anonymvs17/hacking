@@ -27,18 +27,34 @@ Apache/2.2.20
 PHP 
 
 ## Database 
-MySql
+
 
 ## Pages
     
 
 # findings                                                                                                              
 
-* Priviledge escalsation
+* Remote code execution: https://www.exploit-db.com/exploits/35513
+* nc 10.11.1.72 4555 => to enter to James webserver, pw and username is root
+* change pw of john user: Resetted John pw to: `setpassword john 123456`
+* use `telnet 10.11.1.72 110` to login as John under pop3 => see: https://dominicbreuker.com/post/htb_solidstate/
 
-https://www.exploit-db.com/exploits/37292
+# Users
+Users: 
+user: marcus
+user: john
+user: mailadmin
+user: jenny
+user: ../../../../../../../../etc/bash_completion.d
+user: ryuu
+user: joe45
+
+## credentials
+username: ryuu
+password: QUHqhUPRKXMo4m7k
 
 
 # Evidence
-
+* connect to ssh with `ssh ryuu@10.11.1.72` => we get rbash which is a restricted shell
+* https://www.hacknos.com/rbash-escape-rbash-restricted-shell-escape/
 
