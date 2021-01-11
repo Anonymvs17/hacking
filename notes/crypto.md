@@ -12,17 +12,17 @@ Example: RSA
 
 ### Diffie and Hellman key exchance
 F.i.: for https one needs to exchange key in a non-encrypted way but the issue is if someone catches they key.
-Key exchange possible without dirct key exanchange 
-F.e.: 2^x mod privKey => 2^43 mod 32 
-Bob: 2^2 mod 4 = 5
-Alica: 2^5 mod 4 = 3
-Then key exchange with 5 & 3
+Key exchange possible without direct key exanchange 
+* F.e.: 2^x mod privKey => 2^43 mod 32 
+* Bob: 2^2 mod 4 = 5
+* Alica: 2^5 mod 4 = 3
+* Then key exchange with 5 & 3
 
 Reversing it: 
-Bob: 5^2 mod 4 = 7
-Alica: 3^5 mod 4 = 7
+* Bob: 5^2 mod 4 = 7
+* Alica: 3^5 mod 4 = 7
 
-Once this is done they can start communicating encripted
+Once this is done they can start communicating encrypted
 
 # Encoding
 For f.i.: files, binaries, etc.
