@@ -33,11 +33,10 @@ if [ $age -lt 16 ]
 then
 fi
 
-``
+```
 #!/bin/bash
 # if statement
 
-```
 read -p 'What is your age: ' age
 
 if [ $age -ge 18 ]
