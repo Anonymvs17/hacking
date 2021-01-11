@@ -1,16 +1,16 @@
 # initial steps
 
 //create file with nano
-nono simple.sh
+`nano simple.sh`
 
 //to make it executable
-chmod -x input.sh
+`chmod -x input.sh`
 
 //open file
-./file.sh
+`./file.sh`
 
 # findings imports for commands
-type -a cat
+`type -a cat`
 
 # arguments
 
@@ -20,7 +20,7 @@ type -a cat
 echo "filename: $0, the first tow arguments are $1 and $2"
 ``
 ## call it with 
-./simple.sh -boo -yolo
+`./simple.sh -boo -yolo`
 
 # user input
 ``
@@ -30,7 +30,7 @@ echo "your answer was: $answer"
 ``
 ### silent logging
 for pw for example we can use -s as an read argument to not see the text when typing. f.e.: 
-read -sp 'type your pw: ' pw
+`read -sp 'type your pw: ' pw`
 
 # if
 if [ $age -lt 16 ]
@@ -51,17 +51,18 @@ fi
 ```
 
 # logical operators
-if [ $age -ge 18 ] && [ $age -ge 40 ]
+`if [ $age -ge 18 ] && [ $age -ge 40 ]`
 
 # loops
 
 ## for
+```python 
 for ip in $(seq 1 10); do echo 10.11.1.$ip; done
-for i in {1..10}; do
+for i in {1..10}; do```
 
 ## while
 
-```
+```python
 #!/bin/bash
 counter=1
 
@@ -72,7 +73,7 @@ done
 ```
 
 # functions
-```
+```python
 #!/bin/bash
 # function should created before being called;
 # arguments are being passed not with (arg1) instead via $1
@@ -95,7 +96,7 @@ test
 ``
 
 //scripts
-for i in $(cat list.txt); do echo "$i.megacorpone.com"; host $i.megacorpone.com; done
+`for i in $(cat list.txt); do echo "$i.megacorpone.com"; host $i.megacorpone.com; done`
 
 //output
 ``
