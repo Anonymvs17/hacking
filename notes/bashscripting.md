@@ -90,10 +90,9 @@ server
 test
 ``
 
-//scripts
-`for i in $(cat list.txt); do echo "$i.megacorpone.com"; host $i.megacorpone.com; done`
 
-//output
+* script: `for i in $(cat list.txt); do echo "$i.megacorpone.com"; host $i.megacorpone.com; done`
+output
 ``
 mail.megacorpone.com
 mail.megacorpone.com has address 3.220.61.179
