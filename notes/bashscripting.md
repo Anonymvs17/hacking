@@ -1,13 +1,10 @@
 # initial steps
 
-//create file with nano
-`nano simple.sh`
+* create file with nano `nano simple.sh`
 
-//to make it executable
-`chmod -x input.sh`
+* to make it executable `chmod -x input.sh`
 
-//open file
-`./file.sh`
+* open file `./file.sh`
 
 # findings imports for commands
 `type -a cat`
