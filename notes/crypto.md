@@ -31,10 +31,10 @@ UTF8, BASE64, etc.
 
 # Hashing
 Password are usually being saved in hashes but also making sure for integrity (data did not change)
-Example: md5, sha1, sha2, etc.
+* Example: md5, sha1, sha2, etc.
 
 ## Hashcat
-Decript hashes
+Decrypt hashes
 
 ## cracking md5 (0 => md5) -a attackmode
 hashcat -m 0 -a 0 "5f4dcc3b5aa765d61d8327deb882cf99"
