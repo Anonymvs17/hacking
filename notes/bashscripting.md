@@ -16,8 +16,7 @@
 
 echo "filename: $0, the first tow arguments are $1 and $2"
 ``
-## call it with 
-`./simple.sh -boo -yolo`
+* use arguments like this: `./simple.sh -boo -yolo`
 
 # user input
 ``
