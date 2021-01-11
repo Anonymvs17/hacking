@@ -1,6 +1,6 @@
 # basics
 
-!(Buffer Overflow])[img/x86Memory.png]
+![Buffer Overflow](/img/x86Memory.png)
 
 ## Stack
 * When a tread is running it execute code form the progam image or the DDLs.
