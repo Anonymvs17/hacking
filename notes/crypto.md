@@ -45,7 +45,7 @@ Wordlists: hastcat wordlists, password seclist, but also in Linux: /usr/share/wo
 
 ## Which hashtype?
 * To check which hashtype: https://gchq.github.io/CyberChef/
-* or hashid `hashid 5f4dcc3b5aa765d61d8327deb882cf99`
+* or hashid `hashid -m 5f4dcc3b5aa765d61d8327deb882cf99`
 
 ## (Integrity) check that data is not corrupted
 
