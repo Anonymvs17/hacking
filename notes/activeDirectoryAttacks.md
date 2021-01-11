@@ -1,5 +1,3 @@
-AD is to update and manage operating systems, applications, users,and data access on a large scale
-
 # Theory
 When an instance of Active Directory is configured, a domain is created with a name such as corp.com where corp is the name of the organization. Within this domain, we can add various types of objects, including computer and user objects.
 System administrators can (and almost always do) organize these objects with the help of Organizational Units (OU)
@@ -32,3 +30,5 @@ LDAP is an Active Directory Service Interfaces (ADSI) provider (essentially an A
 ## useful blog
 
 https://medium.com/@adam.toscher/top-five-ways-i-got-domain-admin-on-your-internal-network-before-lunch-2018-edition-82259ab73aaa
+
+# more information will follow
