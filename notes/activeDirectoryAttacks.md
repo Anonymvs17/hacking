@@ -26,9 +26,9 @@ We will use a DirectorySearcher object to query Active Directory using the *Ligh
 LDAP is an Active Directory Service Interfaces (ADSI) provider (essentially an API) that supports search functionality against an Active Directory.
 
 * Our script will center around a very specific LDAP provider path: `LDAP://HostName[:PortNumber][/DistinguishedName]`
-* 
+*more information will follow*
+
 ## useful blog
 
 https://medium.com/@adam.toscher/top-five-ways-i-got-domain-admin-on-your-internal-network-before-lunch-2018-edition-82259ab73aaa
 
-# more information will follow
