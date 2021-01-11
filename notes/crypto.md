@@ -37,20 +37,19 @@ Password are usually being saved in hashes but also making sure for integrity (d
 Decrypt hashes
 
 ## cracking md5 (0 => md5) -a attackmode
-hashcat -m 0 -a 0 "5f4dcc3b5aa765d61d8327deb882cf99"
+* decrypting md5 hash "5f4dcc3b5aa765d61d8327deb882cf99" => `hashcat -m 0 -a 0 "5f4dcc3b5aa765d61d8327deb882cf99"`
 #OR --force run with CPU instead of GPU; 0 => md5
 hashcat -m 0 md5hash.txt /home/kali/Documents/rockyou.txt --force
 
 Wordlists: hastcat wordlists, password seclist, but also in Linux: /usr/share/wordlists/ in the zip file
 
 ## Which hashtype?
-TO check which hashtype: https://gchq.github.io/CyberChef/
-
-hases might be in: /var/www/html/CuteNews/cdata/users
+* To check which hashtype: https://gchq.github.io/CyberChef/
+* or hashid `hashid 5f4dcc3b5aa765d61d8327deb882cf99`
 
 ## (Integrity) check that data is not corrupted
 
-dev@localhost ~]# md5sum metasploitable-linux-2.0.0.zip
+* md5: `dev@localhost ~]# md5sum metasploitable-linux-2.0.0.zip`
 8825f2509a9b9a58ec66bd65ef83167f  metasploitable-linux-2.0.0.zip
-[dev@localhost ~]# sha1sum metasploitable-linux-2.0.0.zip
+* sha1: `sha1sum metasploitable-linux-2.0.0.zip`
 84133002ef79fc191e726d41265cf5ab0dfad2f0  metasploitable-linux-2.0.0.zip
