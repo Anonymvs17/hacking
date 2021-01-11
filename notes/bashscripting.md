@@ -6,7 +6,7 @@
 
 * open file `./file.sh`
 
-# findings imports for commands
+# find imports for commands
 `type -a cat`
 
 # arguments
