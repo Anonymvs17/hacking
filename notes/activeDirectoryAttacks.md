@@ -1,5 +1,3 @@
-AD is to update and manage operating systems, applications, users,and data access on a large scale
-
 # Theory
 When an instance of Active Directory is configured, a domain is created with a name such as corp.com where corp is the name of the organization. Within this domain, we can add various types of objects, including computer and user objects.
 System administrators can (and almost always do) organize these objects with the help of Organizational Units (OU)
@@ -17,8 +15,8 @@ an attack against Active Directory infrastructure begins with a successful explo
 * administrators use groups to assign permissions to member users, which means that during our assessment, we would target high-value groups. Usually very interesting: Domain Admins group
 * `net user` enumerate all local user accounts (an workstation)
 * `net user /domain` enumerate entire domain
-* Once we done this, we can now query information about individual users
-* First we should looks for *jeff_admin* (usually DC tend to give roles descriptions and pre/suffix), `net user jeff_admin /domain` => there we can check the global group membership
+* Once we done this, we can now query information about individual users (f.e.: *jeff_admin*)
+* First we should look for *jeff_admin* (usually DC tend to give roles descriptions and pre/suffix), `net user jeff_admin /domain` => there we can check the global group membership
 * To check for groups existing groups: `net group /domain` where me might find some secret groups - a group (and subsequently all the included members) can be added as member to another group. This is known as a nested group.
 *the net.exe command line tool cannot list nested groups and only shows the direct user members*
 
@@ -28,7 +26,9 @@ We will use a DirectorySearcher object to query Active Directory using the *Ligh
 LDAP is an Active Directory Service Interfaces (ADSI) provider (essentially an API) that supports search functionality against an Active Directory.
 
 * Our script will center around a very specific LDAP provider path: `LDAP://HostName[:PortNumber][/DistinguishedName]`
-* 
+*more information will follow*
+
 ## useful blog
 
 https://medium.com/@adam.toscher/top-five-ways-i-got-domain-admin-on-your-internal-network-before-lunch-2018-edition-82259ab73aaa
+
