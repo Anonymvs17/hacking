@@ -54,3 +54,22 @@ f.e: `<script>`
 - if the `<script>` is just filtered non-recursively following might work: `<scr<script>ipt>`
 - or `<scr"ipt>` when only `"` gets removed
 - When input is send from users browser it might be encoded. F.e: application might defend against SQL attack with removing the `'` sign and attacked might avoid this by entering the url encoded form `%27` but also with `%%2727` if the application strips `%27` non recursively
+
+# Handling attackers
+## Handling erorrs
+Erorr should be expected when application is under attack. so the application should handle the errors in an acceptable manner. So rather having general error message than a verbose one (where we can for instance see the exception details)
+
+## Maintaining audit logs
+Audit logs should enable to exactly understand what it is going on. So key events should be logged: 
+* All events related to authentification (successful, failed logins, etc.)
+* Key transactions (kredit card payments)
+* Access attempts to blocked data
+* Any request containing known attack strings.
+
+In banks for instance, every single client request is logged in full providing full forensic research.
+Such audit logs record also IP, time, etc.
+Those audit logs should be stored on an autonomous systen which accepts only update messages from the main application. 
+Should be protected very carefully.
+
+## Alerting admins
+Due to audit logs one can investigate intrusion attempts. Then f.e.: admin can block this IP.
