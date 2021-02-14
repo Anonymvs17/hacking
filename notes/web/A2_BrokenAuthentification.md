@@ -4,6 +4,13 @@ Paypal had a vuln where the user was asked about his secret question, in the pos
 
 
 # Token
+there are number of locations where applicaitons depend on unpredicted tokens.
+* Password recovery tokens sent to the user’s registered e-mail address
+* Tokens placed in hidden form fields to prevent cross-site request forgery attacks (see Chapter 13)
+* Tokens used to give one-time access to protected resources
+* Persistent tokens used in “remember me” functions
+*  Tokens allowing customers of a shopping application
+
 ## Meaningful tokens
 mighe be encripted with: 
 * The numeric identifi er that the application uses to distinguish between
@@ -87,3 +94,29 @@ rnd=191432758301;app=eBankProdTC????????;timd=6343303;
 rnd=191432758301;app=eBankProdTC????????;time=6343503;`
 
 You can easily test applications for this vulnerability using the “bit flipper” *payload* type in Burp Intruder.
+
+## Weaknesses of tokens
+
+* Network: http traffic
+* Logs: get and redirect in header: http://www.webjunction.org/do/Navigation;jsessionid=F27ED2A6AAE4C6DA409A3044E79B8B48?category=327
+* Mapping: The simplest weakness to allow multiple valid tokens to be concurrently assigned to the same user account, using always the same token for a user (sometimes even "poorly designed" remeber me function), Liberal cookie scope (check domain, security, etc.)
+
+# Json Web Token (JWT)
+JSON Web Token (JWT) is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object
+
+example token: `eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MTM5MDMxMzgsImFkbWluIjoidHJ1ZSIsInVzZXIiOiJUb20ifQ.ZMogKrHPkVcm57kB4Bzza0BG0Ysi13cewSpNcgGFGjISsaHraDefAHg1jO9ZZu6TYiEk38jfx0Bw3S2X0bGe6Q`
+
+In this flow you can see the user logs in with a username and password on a successful authentication the server returns. The server creates a new token and returns this one to the client. When the client makes a successive call toward the server it attaches the new token in the "Authorization" header. The server reads the token and first validates the signature after a successful verification the server uses the information in the token to identify the user.
+
+The token contains claims to identify the user and all other information necessary for the server to fulfil the request. Be aware not to store sensitive information in the token and always send them over a secure channel.
+Each JWT token should at least be signed before sending it to a client, if a token is not signed the client application would be able to change the contents of the token
+
+* use to test tokens and decode them: https://jwt.io/
+
+## JWT none attack
+https://pvxs.medium.com/webgoat-jwt-tokens-4-5-ff5bd88e76f
+
+## cracking secret key for JWT
+With the HMAC with SHA-2 Functions you use a secret key to sign and verify the token. Once we figure out this key we can create a new token and sign it. So it is very important the key is strong enough so a brute force or dictionary attack is not feasible
+
+use hashcat for JWT like: `hashcat token.txt -m 16500 -a 3 -w 3 /usr/share/seclists/Discovery/Web-Content/raft-medium-words.txt --force`
