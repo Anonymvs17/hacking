@@ -2,6 +2,9 @@ Paypal had a vuln where the user was asked about his secret question, in the pos
 `secQuestion0=test&secQuestion1=test&jsEnabled=1&verifyMethod=SEC_QUESTIONS&userId=12309746`
 * Also try instead of deleting the secQuestion to `secQuestion3`, `secQuestion4` or `secQuestionA` `secQuestionB`
 
+# Password bruteforcing
+* If IP blocking check if 'X-Forwared-For' header is supported and try to manipulate it
+* Check for response times when providing a very long pw with valid and invalid logins
 
 # Token
 there are number of locations where applicaitons depend on unpredicted tokens.
@@ -120,3 +123,22 @@ https://pvxs.medium.com/webgoat-jwt-tokens-4-5-ff5bd88e76f
 With the HMAC with SHA-2 Functions you use a secret key to sign and verify the token. Once we figure out this key we can create a new token and sign it. So it is very important the key is strong enough so a brute force or dictionary attack is not feasible
 
 use hashcat for JWT like: `hashcat token.txt -m 16500 -a 3 -w 3 /usr/share/seclists/Discovery/Web-Content/raft-medium-words.txt --force`
+
+# Oauth
+
+Usually secure, but not many minumum security restrictions, therefor a lot of security issues left to developers.
+
+Usually used when logging in a a website via Gmail or Facebook login.
+
+## implicit
+Example of implicit way (more fragile)
+
+* use is on side A and clicks to login via facebook, server sende following to oath server: 
+GET /auth?client_id=d1z7f0i81d1qzs3nb1new&redirect_uri=https://ac1b1f021f0f10b6801d701b00ac00b1.web-security-academy.net/oauth-callback&response_type=token&nonce=45977936&scope=openid%20profile%20email HTTP/1.1
+* Once usr logins and cofirms a token is being send to the side A
+
+## usualy
+In contrast to the implicit, not the token is being send from the oauth server but the code, with this code the server has to register a token for the user (so the user browser does not know what is happening there) and then gets the token (bearer)
+
+{stamp:%274Zv73YrV0wYtJVkUPrAW+8jdY2aiOQV8mERBqz4OP/jUAcaKLXk8uQ==%27%2Cnecessary:true%2Cpreferences:true%2Cstatistics:true%2Cmarketing:true%2Cver:1%2Cutc:1613557218737%2Cregion:%27at%27}
+
