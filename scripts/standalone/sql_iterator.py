@@ -47,7 +47,7 @@ if args.sessionToken:
 
 
 session = requests.Session()
-session.proxies={'http': 'http://localhost:9000'}
+session.proxies={'http': 'http://localhost:8080'}
 
 login_page = session.get("http://172.17.0.2:8080/WebGoat/login")
 

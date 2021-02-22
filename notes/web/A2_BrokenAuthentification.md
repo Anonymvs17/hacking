@@ -142,3 +142,12 @@ In contrast to the implicit, not the token is being send from the oauth server b
 
 {stamp:%274Zv73YrV0wYtJVkUPrAW+8jdY2aiOQV8mERBqz4OP/jUAcaKLXk8uQ==%27%2Cnecessary:true%2Cpreferences:true%2Cstatistics:true%2Cmarketing:true%2Cver:1%2Cutc:1613557218737%2Cregion:%27at%27}
 
+# Multifactor Auth
+
+* Check for bruteforcing of 1st and 2nd step
+* Check for login flaws (not validting successful 1st step in 2nd step)
+
+# Vulnerabilities in other authentication mechanisms
+
+* Keeping users logged in: to stay logged in even after closing a browser session. This is usually a simple checkbox labeled something like "Remember me" or "Keep me logged in". Usually this "Remember me" token is stored in cookies which allows to bypass the login. if you have base64 encoded string and you decode it you might get: wiener:0330DIEDLO => then to find out the hash algo for the pw just has you pw. 
+* 
