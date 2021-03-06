@@ -32,3 +32,12 @@ Content-Length: 118
 stockApi=http://192.168.0.68/admin 
 
 * to find out the IP you might interate 192.168.0.x
+
+# SSRF with blacklist-based input filters
+
+* You can embed credentials in a URL before the hostname, using the @ character. For example: https://expected-host@evil-host.
+* You can use the # character to indicate a URL fragment. For example: https://evil-host#expected-host.
+* You can leverage the DNS naming hierarchy to place required input into a fully-qualified DNS name that you control. For example: https://expected-host.evil-host.
+* You can URL-encode characters to confuse the URL-parsing code. This is particularly useful if the code that implements the filter handles URL-encoded characters differently than the code that performs the back-end HTTP request. 
+
+# blind
