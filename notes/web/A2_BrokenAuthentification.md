@@ -150,4 +150,4 @@ In contrast to the implicit, not the token is being send from the oauth server b
 # Vulnerabilities in other authentication mechanisms
 
 * Keeping users logged in: to stay logged in even after closing a browser session. This is usually a simple checkbox labeled something like "Remember me" or "Keep me logged in". Usually this "Remember me" token is stored in cookies which allows to bypass the login. if you have base64 encoded string and you decode it you might get: wiener:0330DIEDLO => then to find out the hash algo for the pw just has you pw. 
-* 
+* Password reset

