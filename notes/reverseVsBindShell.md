@@ -39,5 +39,9 @@ incoming.exe -v
 
 /etc/apache2/ssl/apache.crtSSLCertificateKeyFile /etc/apache2/ssl/apache.key
 
-# in systems
-https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md
+# reverse shell in programming languages
+* example: you have access to user "kid" and on the users "yolo" home directory there is a writebale file
+* You can add a script there with echo "the script" >> nameoffile to overwrite this file. The script points to your kali ip.
+* set up a listener in kali
+* Once the file got executed you will have reverse shell to "yolo"
+Reverse shells: https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md
