@@ -1,0 +1,1 @@
+To get an overview of the attacks check [mindmap](https://mind-map-online.de/m/602f5adfac11b)
