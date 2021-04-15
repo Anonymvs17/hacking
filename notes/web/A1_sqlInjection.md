@@ -89,6 +89,12 @@ try ``'`` in fields to check how it behaves
 4) ' OR 1=1;#
 5) ' OR '1'='1'
 6) numeric: `2 OR 1=1`
+## Union attack
+* if you have SELECT * From Users where '{username}'
+* and you see the injection is working with `' OR 1=1 --` and `' OR 1=2 --` then try:
+* to get how many columns there are in the table (users)
+* Find out the table headlines => this way you can print out the users later
+* also you can enumerate other tables with the union statement and call afterwards their data
 
 ## String SQL injection (CIA-Triad)
 
@@ -108,6 +114,17 @@ There are many different ways to violate availability. If an account is deleted 
 The underlying SQL query looks like that: `"SELECT * FROM access_log WHERE action LIKE '%" + action + "%'"`
 //Dripping an access_log table to delete track
 `'; drop table access_log--`
+
+## Registration (name check)
+
+* example sql if there are already some users with this user name: 
+
+SELECT COUNT(Username)
+FROM Users
+WHERE username = 'yolo';
+
+WHERE username = 'yolo' OR 'test';
+
 
 ### Blind SQL injection
 asks the database true or false questions and determines the answer based on the applications response. This attack is often used when the web application is configured to show generic error messages, but has not mitigated the code that is vulnerable to SQL injection. So no SQL error message shown.
@@ -161,4 +178,7 @@ usually this returns us a table which we can enumerate its rows by f.e.: CHALLEN
 for example in file upload try to use on linux `../` to navigate back in the url (might be achievable via POST request).
 
 example: `http://www.test.com?file=../yolo.txt` or encode URL encode it before (even two times)
+
+# To find out tables for Union
+"' UNION SELECT name,name,name FROM PRAGMA_TABLE_INFO('users') WHERE name != 'id' AND name != 'password' --" 
 
