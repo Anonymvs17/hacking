@@ -37,6 +37,9 @@ might have insecure permissions
 * on win to check when tasks are running (daily, weekly,etc): ``schtasks /query /fo LIST /v``
 * on linux for daily ``/etc/cron.daily``, weekly ``/etc/cron.daily``, etc. check also ``/etc/crontab`` where system admin add their own schedulers (check also permissions)
 
+## sudo rights 
+`sudo -l` => if you have root rights for some programs like for instance msfconsole you then act as root with sudo msfconsole;
+
 ## enumerate installed application and versions
 * on win: ``wmic product get name, version, vendor`` only lists application that are installed by the windows installer
 * on win for system wide updates to check for security updates: ``wmic qfe get Caption, Description, HotfixID, InstalledOn`` (check also for last updates, if the system has not been updated recently might be hackable)
@@ -175,7 +178,7 @@ If the attacker can’t directly get root access via any other techniques he mig
 A classic example of this is assigning SUDO rights to the find command so that another user can search for particular files/logs in the system. While the admin might be unaware that the ‘find’ command contains parameters for command execution, an attacker can execute commands with root privilege.
 
 * `sudo -l` – Prints the commands which we are allowed to run as SUDO
-* f.e.: We can run find, cat and python as SUDO. These all commands will run as root when run with SUDO => `sudo find /home -exec sh -i \;` – find command’s exec parameter can be used for arbitrary code execution or with pyhton to get bash `sudo python -c ‘import pty;pty.spawn(“/bin/bash”);` – spawns a shell
+* f.e.: We can run find, cat and python as SUDO. These all commands will run as root when run with SUDO => `sudo find /home -exec sh -i \;` – find command’s exec parameter can be used for arbitrary code execution or with pyhton to get bash `sudo python3 -c 'import pty;pty.spawn("/bin/bash");'` – spawns a shell
 
 > Never give SUDO rights to any of the programming language compiler, interpreter and editors.
 > This technique can also be applied to vi, more, less, perl, ruby, gdb and others
