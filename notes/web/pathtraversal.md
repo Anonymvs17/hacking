@@ -11,3 +11,11 @@ wfuzz -c -w /usr/share/seclists/Discovery/Web-Content/common.txt --hc 404,403 -u
 # dirb
 //delay of 10 ms for each request
 dirb http//www.megacorpone.com -r -z 10
+
+# scanning subdomain
+returns for example dev.erev0s.com
+gobuster dns -d erev0s.com -w awesome_wordlist.txt -i
+
+# scanning vhosts
+might return a completly different url, checks url then if the IP is the same
+gobuster vhost -u erev0s.com -w awesome_wordlist.txt
