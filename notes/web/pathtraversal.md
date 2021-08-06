@@ -14,8 +14,10 @@ dirb http//www.megacorpone.com -r -z 10
 
 # scanning subdomain
 returns for example dev.erev0s.com
-gobuster dns -d erev0s.com -w awesome_wordlist.txt -i
+gobuster dns -d erev0s.com -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt -i
+
 
 # scanning vhosts
 might return a completly different url, checks url then if the IP is the same
-gobuster vhost -u erev0s.com -w awesome_wordlist.txt
+gobuster vhost -u schooled.htb:80 -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt
+return fe. moodle.schooled.htb:80 
