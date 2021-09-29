@@ -44,4 +44,7 @@ incoming.exe -v
 * You can add a script there with echo "the script" >> nameoffile to overwrite this file. The script points to your kali ip.
 * set up a listener in kali
 * Once the file got executed you will have reverse shell to "yolo"
-Reverse shells: https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md
+
+# reverse shells
+
+https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md
