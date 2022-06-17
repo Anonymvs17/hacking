@@ -39,6 +39,8 @@ might have insecure permissions
 
 ## sudo rights 
 `sudo -l` => if you have root rights for some programs like for instance msfconsole you then act as root with sudo msfconsole;
+`find / -perm /4000` => enumerating files with SUID access from root directory
+
 
 ## enumerate installed application and versions
 * on win: ``wmic product get name, version, vendor`` only lists application that are installed by the windows installer
