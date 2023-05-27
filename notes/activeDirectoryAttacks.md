@@ -1,6 +1,9 @@
 #RPC 
 [querydispinfo](https://www.hackingarticles.in/active-directory-enumeration-rpcclient/)
 
+#Kerberos
+Kerbersroasting: https://www.sentinelone.com/cybersecurity-101/what-is-kerberoasting-attack/#:~:text=Kerberoasting%20Attack%20Example&text=By%20cracking%20the%20password%20of,and%20data%20within%20the%20network.
+
 # Theory
 When an instance of Active Directory is configured, a domain is created with a name such as corp.com where corp is the name of the organization. Within this domain, we can add various types of objects, including computer and user objects.
 System administrators can (and almost always do) organize these objects with the help of Organizational Units (OU)
